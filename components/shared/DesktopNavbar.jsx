@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { Camera, CalendarDays, Images, User, Sparkles } from "lucide-react";
 
 const navItems = [
@@ -16,6 +16,19 @@ const navItems = [
 export default function DesktopNavbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  // Dynamic mouse coordinates for ambient spotlight effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  const spotlightBg = useMotionTemplate`radial-gradient(160px circle at ${mouseX}px ${mouseY}px, rgba(245, 158, 11, 0.15), transparent 80%)`;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,67 +42,177 @@ export default function DesktopNavbar() {
     <header className="hidden md:block fixed top-6 inset-x-0 z-50 pointer-events-none">
       <div className="flex justify-center">
         <motion.nav
+          initial={{ y: -30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 350, damping: 25 }}
           layout
-          transition={{ type: "spring", stiffness: 350, damping: 30 }}
-          className={`pointer-events-auto flex items-center gap-1.5 px-3 py-2 rounded-full border border-white/10 shadow-2xl backdrop-blur-xl transition-all duration-300 ${
-            isScrolled 
-              ? "bg-neutral-950/85 border-amber-500/20 shadow-amber-500/5 py-1.5" 
-              : "bg-neutral-900/75"
+          onMouseMove={handleMouseMove}
+          className={`group/nav pointer-events-auto relative flex items-center gap-2 px-3 py-2 rounded-full border shadow-2xl backdrop-blur-2xl transition-all duration-300 ${
+            isScrolled
+              ? "bg-neutral-950/90 border-amber-500/25 shadow-[0_15px_35px_rgba(0,0,0,0.8),0_0_20px_rgba(245,158,11,0.12)] py-1.5"
+              : "bg-neutral-900/80 border-white/10 hover:border-amber-500/20 shadow-[0_15px_35px_rgba(0,0,0,0.7)]"
           }`}
         >
-          {/* Logo Studio */}
-          <Link 
-            href="/" 
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors"
+          {/* 1. Dynamic Cursor Spotlight Glow */}
+          <div className="pointer-events-none absolute inset-0 rounded-full overflow-hidden">
+            <motion.div
+              className="absolute -inset-px rounded-full opacity-0 group-hover/nav:opacity-100 transition-opacity duration-300"
+              style={{ background: spotlightBg }}
+            />
+          </div>
+
+          {/* 2. Logo Studio with Interactive Hover */}
+          <Link
+            href="/"
+            className="group/logo relative z-10 flex items-center gap-2.5 px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors"
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 to-amber-200 flex items-center justify-center text-neutral-950 font-black text-sm shadow-md shadow-amber-500/30">
-              IX
-            </div>
+            <motion.div
+              whileHover={{ scale: 1.1, rotate: [0, -6, 6, 0] }}
+              whileTap={{ scale: 0.94 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              className="relative w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 via-amber-400 to-amber-200 flex items-center justify-center text-neutral-950 font-black text-xs shadow-md shadow-amber-500/30 group-hover/logo:shadow-amber-500/60 transition-shadow"
+            >
+              <span className="relative z-10">IX</span>
+              {/* Subtle pulsing aura on logo */}
+              <span className="absolute inset-0 rounded-full bg-amber-400/30 blur-sm scale-110 opacity-0 group-hover/logo:opacity-100 transition-opacity duration-300" />
+            </motion.div>
+
             {!isScrolled && (
-              <span className="font-bold tracking-wider text-sm bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent">
+              <span className="font-bold tracking-wider text-sm bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent group-hover/logo:from-amber-200 group-hover/logo:via-white group-hover/logo:to-amber-300 transition-all duration-300">
                 ILUXY
               </span>
             )}
           </Link>
 
-          <div className="h-5 w-px bg-white/10 mx-1" />
+          {/* Divider */}
+          <div className="relative z-10 h-5 w-px bg-white/10 mx-0.5" />
 
-          {/* Nav Links */}
-          <div className="flex items-center gap-1">
-            {navItems.map((item) => {
+          {/* 3. Nav Links with Magnetic Sliding Hover Pill */}
+          <div
+            className="relative z-10 flex items-center gap-0.5"
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            {navItems.map((item, idx) => {
               const isActive = pathname === item.href;
+              const isHovered = hoveredIndex === idx;
               const Icon = item.icon;
+
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="relative px-4 py-2 text-xs uppercase tracking-wider font-semibold rounded-full transition-colors text-neutral-300 hover:text-white"
+                  onMouseEnter={() => setHoveredIndex(idx)}
+                  className={`group/item relative px-4 py-2 text-xs uppercase tracking-wider font-semibold rounded-full transition-colors duration-200 ${
+                    isActive
+                      ? "text-amber-400"
+                      : isHovered
+                      ? "text-white"
+                      : "text-neutral-400 hover:text-neutral-200"
+                  }`}
                 >
-                  {isActive && (
+                  {/* Sliding Hover Indicator Pill */}
+                  {isHovered && (
                     <motion.div
-                      layoutId="desktop-active-pill"
-                      className="absolute inset-0 bg-white/10 rounded-full border border-white/20 backdrop-blur-md"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      layoutId="navbar-hover-pill"
+                      className="absolute inset-0 rounded-full bg-white/10 border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.15)] backdrop-blur-sm"
+                      transition={{
+                        type: "spring",
+                        stiffness: 420,
+                        damping: 30,
+                      }}
                     />
                   )}
+
+                  {/* Active Page Pill (shows when not hovering this specific tab) */}
+                  {isActive && !isHovered && (
+                    <motion.div
+                      layoutId="navbar-active-pill"
+                      className="absolute inset-0 rounded-full bg-amber-500/10 border border-amber-500/25 backdrop-blur-sm"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+
+                  {/* Item Content with micro-animated Icon */}
                   <span className="relative z-10 flex items-center gap-1.5">
-                    <Icon className="w-3.5 h-3.5" />
-                    {item.label}
+                    <motion.span
+                      animate={{
+                        y: isHovered ? -2 : 0,
+                        scale: isHovered ? 1.15 : 1,
+                        rotate: isHovered ? [0, -6, 6, 0] : 0,
+                      }}
+                      transition={{
+                        duration: 0.3,
+                        ease: "easeOut",
+                      }}
+                      className="inline-flex items-center"
+                    >
+                      <Icon
+                        className={`w-3.5 h-3.5 transition-colors duration-200 ${
+                          isActive
+                            ? "text-amber-400"
+                            : isHovered
+                            ? "text-amber-300"
+                            : "text-neutral-400 group-hover/item:text-neutral-200"
+                        }`}
+                      />
+                    </motion.span>
+                    <span className="transition-transform duration-200 group-hover/item:translate-x-0.5">
+                      {item.label}
+                    </span>
                   </span>
+
+                  {/* Glowing Active Dot Indicator underneath */}
+                  {isActive && (
+                    <motion.span
+                      layoutId="navbar-active-dot"
+                      className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-amber-400 shadow-[0_0_8px_#f59e0b]"
+                      transition={{
+                        type: "spring",
+                        stiffness: 350,
+                        damping: 25,
+                      }}
+                    />
+                  )}
                 </Link>
               );
             })}
           </div>
 
-          {/* Quick Action Button */}
-          <div className="pl-1">
-            <Link
-              href="/booking"
-              className="group relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-neutral-950 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+          {/* 4. "Book Slot" Quick Action Button with Shimmer & Spring Hover */}
+          <div className="relative z-10 pl-1">
+            <motion.div
+              whileHover={{ scale: 1.05, y: -1 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 450, damping: 20 }}
             >
-              <Sparkles className="w-3.5 h-3.5 transition-transform group-hover:rotate-12" />
-              <span>Book Slot</span>
-            </Link>
+              <Link
+                href="/booking"
+                className="group/cta relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-neutral-950 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 rounded-full shadow-[0_0_20px_rgba(245,158,11,0.35)] hover:shadow-[0_0_25px_rgba(245,158,11,0.6)] overflow-hidden transition-all duration-300"
+              >
+                {/* Continuous Shimmer Light Beam */}
+                <motion.div
+                  className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 pointer-events-none"
+                  initial={{ x: "-180%" }}
+                  animate={{ x: "280%" }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 2.8,
+                    ease: "easeInOut",
+                    repeatDelay: 1.2,
+                  }}
+                />
+
+                {/* Sparkling Icon & Label */}
+                <span className="relative z-10 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 transition-transform duration-300 group-hover/cta:rotate-45 group-hover/cta:scale-125" />
+                  <span>Book Slot</span>
+                </span>
+              </Link>
+            </motion.div>
           </div>
         </motion.nav>
       </div>
