@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Iluxy Creative — Sistem Informasi Booking & Private Gallery Web
 
-## Getting Started
+Sistem Informasi Pemesanan Jasa Fotografi, Videografi, dan Manajemen Private Gallery Berbasis Web pada **Iluxy Creative Padang**.
 
-First, run the development server:
+Dikembangkan sebagai Proyek Perangkat Lunak Terintegrasi (D4 Teknologi Rekayasa Perangkat Lunak, Jurusan Teknologi Informasi, Politeknik Negeri Padang).
 
+---
+
+## 🛠️ Tech Stack & Arsitektur
+
+* **Framework**: [Next.js](https://nextjs.org) (App Router, JavaScript/JSX)
+* **Styling & UI**: [Tailwind CSS](https://tailwindcss.com), [Framer Motion](https://www.framer.com/motion/) (Micro-interactions & Animasi), [Lucide React](https://lucide.dev)
+* **Backend as a Service (BaaS)**: [Supabase](https://supabase.com) (PostgreSQL 3NF, Row-Level Security / RLS, Auth, Storage Buckets)
+* **Visualisasi & Utility**: [Recharts](https://recharts.org), `canvas-confetti`, `browser-image-compression`
+
+---
+
+## 🚀 Memulai Proyek (Getting Started)
+
+### 1. Prasyarat
+Pastikan telah menginstal [Node.js](https://nodejs.org/) (versi LTS yang direkomendasikan).
+
+### 2. Instalasi Dependensi
+Jalankan perintah instalasi paket:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Konfigurasi Environment
+Pastikan file `.env.local` telah terisi kredensial Supabase proyek:
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 4. Menjalankan Server Pengembangan
+```bash
+npm run dev
+```
+Buka browser di [http://localhost:3000](http://localhost:3000) untuk melihat aplikasi berjalan.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📌 Standar Konvensi Pesan Commit (Git Commit Conventions)
 
-To learn more about Next.js, take a look at the following resources:
+Setiap pengembang yang berkontribusi pada repositori ini **wajib** menggunakan format pesan commit terstandarisasi untuk mempermudah pelacakan histori, review kode, dan audit sprint:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Format Penulisan:
+```
+<kategori>: <indikasi pesan commit / dampak>
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Tabel Klasifikasi Kategori:
 
-## Deploy on Vercel
+| Kategori | Indikasi Pesan Commit / Dampak |
+| :--- | :--- |
+| **`feat`** | Penambahan fitur baru |
+| **`fix`** | Perbaikan bug |
+| **`refactor`** | Perubahan struktur tanpa ubah fungsi |
+| **`docs`** | Perubahan dokumentasi |
+| **`test`** | Tambahan / modifikasi testing |
+| **`chore`** | Pembaruan minor (config, dependensi, dsb.) |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Contoh Penggunaan:
+```bash
+git commit -m "feat: Membuat halaman login"
+git commit -m "fix: Memperbaiki error pada view dashboard"
+git commit -m "feat: Menambahkan animasi sliding hover dan cursor spotlight pada DesktopNavbar"
+git commit -m "docs: Update sprint planning dan panduan commit convention"
+git commit -m "chore: Konfigurasi Tailwind CSS dan update package-lock"
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📋 Log Riwayat Pembaruan Proyek (Changelog / Update Log)
+
+> [!TIP]
+> **Petunjuk Update**: Setiap kali melakukan push atau menyelesaikan sprint/fitur baru, tambahkan catatan perubahan di bagian paling atas riwayat di bawah ini menggunakan kategori commit yang relevan (`feat`, `fix`, `refactor`, `docs`, `test`, `chore`).
+
+### [15 November 2026] - Upgrade Animasi Navigasi & Standarisasi Git
+* `feat`: Menambahkan animasi magnetic sliding hover pill (`layoutId="navbar-hover-pill"`) pada `DesktopNavbar.jsx`.
+* `feat`: Menambahkan efek real-time cursor spotlight glow mengikuti pergerakan kursor mouse.
+* `feat`: Menambahkan animasi mikro pada icon menu (micro-tilt dan hover scale) serta logo avatar `IX`.
+* `feat`: Menambahkan continuous shimmer light beam dan efek scale-tap pada tombol "Book Slot".
+* `docs`: Mengintegrasikan tabel standar konvensi commit pada `SPRINT_PLANNING_20_ILUXY_CREATIVE.md`.
+* `docs`: Memperbarui `README.md` dengan dokumentasi proyek, aturan commit, dan log pembaruan berkala.
+
+### [14 November 2026] - Fondasi Navigasi & Komponen UI (Sprint 03 - 05)
+* `feat`: Implementasi `DesktopNavbar.jsx` dengan dynamic scroll morphing (kapsul menciut saat scroll).
+* `feat`: Implementasi `MobileBottomBar.jsx` dengan liquid spring blob dan floating action button (FAB).
+* `feat`: Pembuatan komponen UI interaktif: `AnimatedButton.jsx`, `InteractiveCard.jsx` (3D tilt), dan `SkeletonShimmer.jsx`.
+* `style`: Konfigurasi design tokens Dark Luxury Studio (`#0A0A0E`, aksen amber emas `#F59E0B`, custom scrollbar).
+
+### [13 November 2026] - Setup Basis Data & Fondasi Awal (Sprint 01 - 02)
+* `chore`: Inisialisasi proyek Next.js 14 App Router (JavaScript/JSX) dan konfigurasi Tailwind CSS.
+* `feat`: Pembuatan skema DDL 11 tabel relasional 3NF, ENUMs, dan Stored Procedure anti-double booking di `supabase_schema.sql`.
+* `feat`: Konfigurasi Row-Level Security (RLS) dan 4 bucket penyimpanan Supabase Storage.
+* `chore`: Integrasi Supabase client & server helper di `lib/supabase/`.

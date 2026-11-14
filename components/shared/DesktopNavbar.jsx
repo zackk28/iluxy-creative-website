@@ -67,7 +67,7 @@ export default function DesktopNavbar() {
             className="group/logo relative z-10 flex items-center gap-2.5 px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors"
           >
             <motion.div
-              whileHover={{ scale: 1.1, rotate: [0, -6, 6, 0] }}
+              whileHover={{ scale: 1.1, rotate: 6 }}
               whileTap={{ scale: 0.94 }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
               className="relative w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 via-amber-400 to-amber-200 flex items-center justify-center text-neutral-950 font-black text-xs shadow-md shadow-amber-500/30 group-hover/logo:shadow-amber-500/60 transition-shadow"
@@ -142,11 +142,12 @@ export default function DesktopNavbar() {
                       animate={{
                         y: isHovered ? -2 : 0,
                         scale: isHovered ? 1.15 : 1,
-                        rotate: isHovered ? [0, -6, 6, 0] : 0,
+                        rotate: isHovered ? 6 : 0,
                       }}
                       transition={{
-                        duration: 0.3,
-                        ease: "easeOut",
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 20,
                       }}
                       className="inline-flex items-center"
                     >
@@ -199,6 +200,7 @@ export default function DesktopNavbar() {
                   initial={{ x: "-180%" }}
                   animate={{ x: "280%" }}
                   transition={{
+                    type: "tween",
                     repeat: Infinity,
                     duration: 2.8,
                     ease: "easeInOut",
