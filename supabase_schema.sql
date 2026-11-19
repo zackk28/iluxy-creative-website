@@ -241,8 +241,10 @@ CREATE POLICY "Admin Full Categories" ON package_categories FOR ALL USING (is_ad
 
 -- Users & Customers
 CREATE POLICY "User Self Access" ON users FOR SELECT USING (auth.uid() = id OR is_admin());
+CREATE POLICY "User Self Insert" ON users FOR INSERT WITH CHECK (auth.uid() = id);
 CREATE POLICY "User Self Update" ON users FOR UPDATE USING (auth.uid() = id OR is_admin());
 CREATE POLICY "Customer Self Access" ON customers FOR SELECT USING (auth.uid() = user_id OR is_admin());
+CREATE POLICY "Customer Self Insert" ON customers FOR INSERT WITH CHECK (auth.uid() = user_id);
 CREATE POLICY "Customer Self Update" ON customers FOR UPDATE USING (auth.uid() = user_id OR is_admin());
 
 -- Bookings
@@ -266,6 +268,12 @@ CREATE POLICY "Public Read Published Galleries" ON galleries FOR SELECT USING (s
 CREATE POLICY "Media Assets Read" ON media_assets FOR SELECT USING (true);
 CREATE POLICY "Customer Proofing Access" ON proofing_selections FOR ALL USING (true);
 CREATE POLICY "Master Downloads Access" ON master_downloads FOR SELECT USING (true);
+
+-- Grant privileges to anon and authenticated roles
+GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL ROUTINES IN SCHEMA public TO anon, authenticated, service_role;
 
 -- 11. STORAGE BUCKETS
 INSERT INTO storage.buckets (id, name, public) VALUES 

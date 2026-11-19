@@ -1,298 +1,374 @@
-# MASTER SPRINT PLANNING & STATUS TRACKER (20 MICRO-SPRINTS / 14 HARI)
+# MASTER SPRINT PLANNING & AUDIT SCRUM FRAMEWORK
 ## Sistem Informasi Pemesanan Jasa Fotografi & Manajemen Private Gallery Web
 ### Objek Studi: Iluxy Creative Padang
+
 * **Pengembang / Mahasiswa**: Zackri Kurnia Amri (NIM: 2411082023)  
 * **Program Studi**: D4 Teknologi Rekayasa Perangkat Lunak (TRPL), Jurusan TI, Politeknik Negeri Padang  
 * **Dosen Pengampu**: Dwiny Meidelfi, S.KOM., M.CS. & Nurraudya Tuz Zahra, S.SI., M.C.S.(AI)  
-* **Tumpukan Teknologi**: **Next.js 14 (JavaScript Murni / JSX)** + **React.js** + **Supabase (PostgreSQL, Auth, Storage, RLS)** + Tailwind CSS + Framer Motion  
-* **Lokasi Source Code**: Folder `web/`  
-* **Timeline Eksekusi**: **Akselerasi 2 Minggu (14 Hari: 13 November 2026 – 27 November 2026)**  
+* **Tumpukan Teknologi**: Next.js 16 (App Router, Turbopack, JSX) + React 19 + Supabase (PostgreSQL 12 Tabel 3NF, Auth, Storage, RLS) + Tailwind CSS v4 + Framer Motion  
+* **Timeline Eksekusi**: **15 Hari Kalender / 14 Hari Kerja Efektif (13 November 2026 – 27 November 2026)**  
+* **Lokasi Source Code**: Folder `web/`
 
 ---
 
-## 📊 DASHBOARD STATUS SPRINT (LIVE PROGRESS TRACKER)
+## 1. PARAMETER PENGELOLAAN PROYEK & DEFINISI SCRUM
 
-| No | Sprint ID | Target Modul & Fitur | Hari | Bobot | Status | Nama Komentar Commit (Git) |
-|:---:|:---|:---|:---:|:---:|:---:|:---|
-| **01** | **Sprint 01** | Setup Next.js 14 JS, Tailwind & Supabase SDK | H-1 | 8 SP | 🟢 SELESAI | `chore: inisialisasi nextjs 14, tailwindcss dan supabase sdk` |
-| **02** | **Sprint 02** | Skema 11 Tabel Relasional, RLS & Storage | H-1 | 13 SP | 🟢 SELESAI | `feat: implementasi ddl 11 tabel relasional 3nf, rls dan storage bucket` |
-| **03** | **Sprint 03** | Design Tokens, Button Anim, 3D Card & Shimmer | H-2 | 13 SP | 🟢 SELESAI | `feat: implementasi design system dark luxury dan komponen micro interactions` |
-| **04** | **Sprint 04** | Desktop Floating Pill Navbar (Scroll & Hover) | H-3 | 8 SP | 🟢 SELESAI | `feat: implementasi desktop floating pill navbar dengan dynamic scroll dan hover animation` |
-| **05** | **Sprint 05** | Mobile Bottom Tab Bar, Liquid Blob & FAB | H-3 | 8 SP | 🟢 SELESAI | `feat: implementasi mobile bottom tab bar dengan liquid spring blob dan fab` |
-| **06** | **Sprint 06** | Multi-Role Auth, Login, Register & Middleware | H-4 | 13 SP | 🎯 SIAP DIGAS | `feat: implementasi autentikasi multi-role registrasi klien dan route middleware` |
-| **07** | **Sprint 07** | Katalog Publik, Portofolio & Filter Kategori | H-5 | 8 SP | ⏳ Antrean | `feat: implementasi halaman katalog publik dan filter kategori dinamis` |
-| **08** | **Sprint 08** | Detail Paket Layanan & Admin CRUD Layanan | H-5 | 13 SP | ⏳ Antrean | `feat: implementasi detail spesifikasi paket dan dashboard admin crud layanan` |
-| **09** | **Sprint 09** | Kalender Slot & PostgreSQL Anti Double-Booking | H-6 | 13 SP | ⏳ Antrean | `feat: implementasi kalender ketersediaan slot dan fungsi anti double booking` |
-| **10** | **Sprint 10** | Multi-Step Booking Wizard & Kode Order | H-7 | 13 SP | ⏳ Antrean | `feat: implementasi multi-step booking wizard dan invoice code generator` |
-| **11** | **Sprint 11** | Riwayat Booking Klien & Aturan Batal H-3 | H-7 | 8 SP | ⏳ Antrean | `feat: implementasi dashboard riwayat booking klien dan validasi pembatalan h-3` |
-| **12** | **Sprint 12** | Digital Invoicing DP/Pelunasan & Salin Rekening | H-8 | 8 SP | ⏳ Antrean | `feat: implementasi digital invoicing engine dp dan pelunasan serta salin rekening` |
-| **13** | **Sprint 13** | Dropzone Upload Struk Bukti Transfer | H-9 | 8 SP | ⏳ Antrean | `feat: implementasi dropzone upload bukti transfer dan kompresi gambar` |
-| **14** | **Sprint 14** | Admin Verifikasi Pembayaran & Penugasan Kru | H-9 | 13 SP | ⏳ Antrean | `feat: implementasi panel admin verifikasi pembayaran dan penugasan kru fotografer` |
-| **15** | **Sprint 15** | Admin Mass Upload & Watermark Hak Cipta | H-10 | 13 SP | ⏳ Antrean | `feat: implementasi chunked mass upload foto galeri dan auto watermark engine` |
-| **16** | **Sprint 16** | Gerbang Private Gallery PIN 6-Digit (OTP Shake) | H-11 | 8 SP | ⏳ Antrean | `feat: implementasi gerbang akses private gallery pin 6 digit dan masonry layout` |
-| **17** | **Sprint 17** | Kurasi Proofing, Quota Counter & Retouch | H-12 | 13 SP | ⏳ Antrean | `feat: implementasi kurasi foto proofing cetak album dan catatan retouch` |
-| **18** | **Sprint 18** | Gated Master ZIP (Syarat Lunas 100%) | H-13 | 13 SP | ⏳ Antrean | `feat: implementasi gated master zip download dengan expiring token 48 jam` |
-| **19** | **Sprint 19** | Dashboard Analitik Omzet & Direktori Klien | H-13 | 13 SP | ⏳ Antrean | `feat: implementasi dashboard analitik omzet studio dan direktori pelanggan` |
-| **20** | **Sprint 20** | Full Pentest, Testing 17 FR & Kesiapan Sidang | H-14 | 8 SP | ⏳ Antrean | `test: full penetration testing 17 fr, audit lighthouse dan final deployment` |
-| **TOTAL** | **20 Sprints** | **17 FR + 11 Tabel + OWASP Defense** | **14 Hari**| **220 SP** | **5 / 20 SELESAI (25%)** | **SIAP LANJUT KE SPRINT 06** |
+### 1.1 Definisi Estimasi & Kapasitas Tim
+* **1 Story Point (SP)** $\approx$ **1 Jam Kerja Rekayasa Efektif** (mencakup koding, testing lokal, dan dokumentasi).
+* **Total Beban Kerja**: **215 Story Points** (terbagi ke 20 Product Backlog Items dalam 4 Sprint Utama).
+* **Posisi Hari Ini (H-8 / 20 November 2026)**:
+  * Progres Aktual Selesai: **71 SP (PBI-01 s/d PBI-07 / 33% Progres Total)**.
+  * Sisa Beban Kerja: **144 SP** dalam 6–7 hari kerja menuju deadline 27 November 2026.
+  * Velocity Rata-rata Aktual: **$\approx 9 - 10$ SP / hari**.
 
----
+### 1.2 Global Definition of Done (DoD)
+Suatu Product Backlog Item (PBI) hanya boleh berstatus 🟢 **SELESAI** jika memenuhi 6 kriteria mutlak:
+1. **Source Code**: Kode bersih (*lint free* via `npm run lint`), modular, dan mengikuti arsitektur Next.js 16 App Router.
+2. **Build Clean**: Lolos pengujian kompilasi produksi tanpa error (`npm run build` sukses).
+3. **Database & RLS**: Tabel memiliki foreign key 3NF, schema terverifikasi, dan hak akses RLS Supabase aktif.
+4. **Keamanan (Shift-Left Security)**: Kebal dari SQL Injection, sanitasi input XSS, server-side payload validation, dan proteksi IDOR.
+5. **Responsif & UI**: Tampilan konsisten pada resolusi Desktop ($\ge 1024px$) dan Mobile ($\le 768px$) dengan Dark Luxury theme.
+6. **Git Convention**: Commit rapi menggunakan format standar konvensi (`feat`, `fix`, `docs`, `chore`, dsb.).
 
-## 2. DETAIL PROGRESS & AUDIT TIAP SPRINT
-
----
-
-### MINGGU 1: FONDASI, NAVIGASI, KATALOG & BOOKING ENGINE
-
-#### SPRINT 01: Setup Next.js 14 (JavaScript Murni), Tailwind CSS & Supabase SDK
-* **Status**: 🟢 **SELESAI & TERVERIFIKASI [x]**
-* **Target Waktu**: Hari 1 | **Story Points**: 8 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "chore: inisialisasi nextjs 14, tailwindcss dan supabase sdk"`
-* **Bukti Deliverable di Folder `web/`**:
-  - [x] Project Next.js 14 App Router (JavaScript murni / JSX) terinisialisasi.
-  - [x] Dependensi terpasang di `web/package.json`: `@supabase/supabase-js`, `@supabase/ssr`, `framer-motion`, `lucide-react`, `clsx`, `tailwind-merge`, `recharts`, `browser-image-compression`, `canvas-confetti`.
-  - [x] Environment terpasang di `web/.env.local` terhubung ke Supabase project `cpoxikforoqmtyglcbnr`.
-  - [x] Client helper Supabase siap pakai di `web/lib/supabase/client.js` dan `web/lib/supabase/server.js`.
-  - [x] Helper fungsi formatting IDR & tanggal di `web/lib/utils.js`.
-* **🛡️ Hacker Pentest Audit**: Lolos audit isolasi secret key. `SUPABASE_SERVICE_ROLE_KEY` tidak bocor ke client bundle.
+### 1.3 Klasifikasi Prioritas Fitur (MoSCoW)
+* **Must Have (Wajib Ada untuk Syarat Sidang)**:
+  * Autentikasi Multi-Role, Katalog Layanan, Booking Sesi Anti-Double Booking, Invoicing DP, Upload Bukti Bayar, Verifikasi Admin, Private Gallery PIN 6-Digit, dan Kurasi Foto Cetak Album.
+* **Should Have (Sangat Penting untuk Operasional)**:
+  * Filter & Live Search Katalog, Multi-Step Wizard Booking, Watermark Otomatis Foto Studio, dan Gated Master ZIP Download.
+* **Could Have (Fitur Pelengkap / Estetika)**:
+  * Micro-animations kursor spotlight, preset akun demo instan, dan dashboard analitik omzet Recharts.
+* **Won't Have (Ditunda ke Fase Pengembangan v2.0)**:
+  * Integrasi Payment Gateway Otomatis (Midtrans/Xendit) — transaksi tetap via Transfer Bank Manual + Upload Bukti Bayar.
+  * Integrasi WhatsApp Gateway API berbayar — dialihkan menggunakan URL Direct WhatsApp `https://wa.me/...`.
 
 ---
 
-#### SPRINT 02: DDL 11 Tabel Relasional 3NF, Enums, Indeks & RLS Supabase
-* **Status**: 🟢 **SELESAI & TERVERIFIKASI [x]**
-* **Target Waktu**: Hari 1 | **Story Points**: 13 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi ddl 11 tabel relasional 3nf, rls dan storage bucket"`
-* **Bukti Deliverable di Folder `web/`**:
-  - [x] File DDL basis data fisik PostgreSQL di `web/supabase_schema.sql` (dan di root folder).
-  - [x] 6 Custom ENUM: `user_role`, `booking_status`, `invoice_status`, `payment_type`, `payment_status`, `gallery_status`.
-  - [x] 11 Tabel Relasional 3NF: `users`, `customers`, `package_categories`, `packages`, `bookings`, `crew_assignments`, `invoices`, `payments`, `galleries`, `media_assets`, `proofing_selections`, `master_downloads`.
-  - [x] Stored Procedure: `check_slot_availability(p_date, p_start, p_end)` untuk anti-double booking.
-  - [x] 4 Storage Buckets: `payment-proofs`, `gallery-watermarked`, `gallery-originals`, `master-zips`.
-  - [x] Row Level Security (RLS) diaktifkan pada seluruh tabel.
-* **🛡️ Hacker Pentest Audit**: RLS policies menjamin klien tidak dapat melakukan cross-tenant injection.
+## 2. STRUKTUR 4 SPRINT UTAMA (SCRUM RE-PLANNING)
+
+Untuk menghindari fragmentasi kerja, 20 micro-sprint kini direstrukturisasi menjadi **4 Sprint Utama Scrum**:
+
+```mermaid
+flowchart LR
+    S1["Sprint 1: Fondasi & UI<br>(50 SP) - Selesai"] --> S2["Sprint 2: Auth & Katalog<br>(34 SP) - Berjalan"]
+    S2 --> S3["Sprint 3: Booking Engine<br>(63 SP) - Antrean"]
+    S3 --> S4["Sprint 4: Gallery & Sidang<br>(68 SP) - Antrean"]
+```
+
+| Sprint | Nama Sprint & Fokus Utama | Rentang Waktu | Target SP | Status | Sprint Goal |
+|:---:|:---|:---:|:---:|:---:|:---|
+| **Sprint 1** | **Fondasi, Design Tokens & Navigasi** | 13 - 15 Nov (H-1 s/d H-3) | 50 SP | 🟢 **SELESAI** | Menyiapkan fondasi Next.js 16, skema 12 tabel Supabase, design system, dan navigasi responsif. |
+| **Sprint 2** | **Autentikasi Multi-Role & Katalog Publik** | 16 - 20 Nov (H-4 s/d H-8) | 34 SP | 🟡 **IN PROGRESS (71 SP)** | Mengamankan autentikasi Klien vs Admin, proteksi rute middleware, dan mempublikasikan katalog layanan. |
+| **Sprint 3** | **Booking Engine & Invoicing Finansial** | 21 - 24 Nov (H-9 s/d H-12) | 63 SP | ⏳ **Antrean** | Membangun kalender anti-bentrok slot sesi, booking wizard, penerbitan invoice digital, dan verifikasi bayar. |
+| **Sprint 4** | **Private Gallery, Proofing & Kesiapan Sidang** | 25 - 27 Nov (H-13 s/d H-15) | 68 SP | ⏳ **Antrean** | Menyediakan gerbang galeri PIN 6 digit, kurasi album, gated master ZIP, serta audit pentest final sidang. |
+| **TOTAL** | **4 Sprints (20 Product Backlog Items)** | **15 Hari** | **215 SP** | **71 / 215 SP (33%)** | **Critical Path Menuju Sidang Sarjana Terapan TRPL** |
 
 ---
 
-#### SPRINT 03: Design System, Dark Luxury & Komponen Micro-Interactions (`.jsx`)
-* **Status**: 🟢 **SELESAI & TERVERIFIKASI [x]**
-* **Target Waktu**: Hari 2 | **Story Points**: 13 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi design system dark luxury dan komponen micro interactions"`
-* **Bukti Deliverable di Folder `web/`**:
-  - [x] Palet Dark Luxury Studio (`#0A0A0E`, aksen amber `#F59E0B`, dark scrollbar) terpasang di `web/app/globals.css`.
-  - [x] `web/components/ui/AnimatedButton.jsx` (Magnetic hover, tap scale 0.96, spinner morphing).
-  - [x] `web/components/ui/InteractiveCard.jsx` (3D tilt tracking mouse kursor & border glow).
-  - [x] `web/components/ui/SkeletonShimmer.jsx` (Animasi shimmer gradient & preset card skeleton).
-* **🛡️ Hacker Pentest Audit**: Tombol menerapkan DOM disabled saat loading, mencegah spam double-submit.
+## 3. DASHBOARD PRODUCT BACKLOG ITEMS (PBI-01 s/d PBI-20)
+
+| ID | Sprint | Modul & Fitur | Prioritas | SP | Status | Rekomendasi Pesan Komentar Commit |
+|:---:|:---:|:---|:---:|:---:|:---:|:---|
+| **PBI-01** | Sprint 1 | Setup Next.js 16, Tailwind v4 & Supabase SDK | Must | 8 SP | 🟢 Selesai | `chore: inisialisasi nextjs 14, tailwindcss dan supabase sdk` |
+| **PBI-02** | Sprint 1 | DDL 12 Tabel Relasional 3NF, RLS & Storage | Must | 13 SP | 🟢 Selesai | `feat: implementasi ddl 11 tabel relasional 3nf, rls dan storage bucket` |
+| **PBI-03** | Sprint 1 | Design Tokens, Button Anim, 3D Card & Shimmer | Could | 13 SP | 🟢 Selesai | `feat: implementasi design system dark luxury dan komponen micro interactions` |
+| **PBI-04** | Sprint 1 | Desktop Floating Pill Navbar (Scroll & Hover) | Could | 8 SP | 🟢 Selesai | `feat: implementasi desktop floating pill navbar dengan dynamic scroll dan hover animation` |
+| **PBI-05** | Sprint 1 | Mobile Bottom Tab Bar, Liquid Blob & FAB | Should | 8 SP | 🟢 Selesai | `feat: implementasi mobile bottom tab bar dengan liquid spring blob dan fab` |
+| **PBI-06** | Sprint 2 | Multi-Role Auth, Login, Register & Middleware | Must | 13 SP | 🟢 Selesai | `feat: implementasi autentikasi multi-role registrasi klien dan route middleware` |
+| **PBI-07** | Sprint 2 | Showcase Katalog Publik & Filter Kategori | Should | 8 SP | 🟢 Selesai | `feat: implementasi halaman katalog publik dan filter kategori dinamis` |
+| **PBI-08** | Sprint 2 | Detail Spesifikasi Paket & Admin CRUD Layanan | Must | 13 SP | 🎯 **SIAP DIGAS** | `feat: implementasi detail spesifikasi paket dan dashboard admin crud layanan` |
+| **PBI-09** | Sprint 3 | Kalender Slot & PostgreSQL Anti Double-Booking | Must | 13 SP | ⏳ Antrean | `feat: implementasi kalender ketersediaan slot dan fungsi anti double booking` |
+| **PBI-10** | Sprint 3 | Multi-Step Booking Wizard & Kode Order Unik | Must | 13 SP | ⏳ Antrean | `feat: implementasi multi-step booking wizard dan invoice code generator` |
+| **PBI-11** | Sprint 3 | Riwayat Booking Klien & Aturan Pembatalan H-3 | Should | 8 SP | ⏳ Antrean | `feat: implementasi dashboard riwayat booking klien dan validasi pembatalan h-3` |
+| **PBI-12** | Sprint 3 | Digital Invoicing DP/Pelunasan & Salin Rekening | Must | 8 SP | ⏳ Antrean | `feat: implementasi digital invoicing engine dp dan pelunasan serta salin rekening` |
+| **PBI-13** | Sprint 3 | Dropzone Upload Struk Bukti Transfer | Must | 8 SP | ⏳ Antrean | `feat: implementasi dropzone upload bukti transfer dan kompresi gambar` |
+| **PBI-14** | Sprint 3 | Admin Verifikasi Pembayaran & Penugasan Kru | Must | 13 SP | ⏳ Antrean | `feat: implementasi panel admin verifikasi pembayaran dan penugasan kru fotografer` |
+| **PBI-15** | Sprint 4 | Admin Chunked Mass Upload & Auto-Watermark | Should | 13 SP | ⏳ Antrean | `feat: implementasi chunked mass upload foto galeri dan auto watermark engine` |
+| **PBI-16** | Sprint 4 | Gerbang Private Gallery PIN 6-Digit (OTP Shake) | Must | 8 SP | ⏳ Antrean | `feat: implementasi gerbang akses private gallery pin 6 digit dan masonry layout` |
+| **PBI-17** | Sprint 4 | Kurasi Proofing Cetak Album & Catatan Retouch | Must | 13 SP | ⏳ Antrean | `feat: implementasi kurasi foto proofing cetak album dan catatan retouch` |
+| **PBI-18** | Sprint 4 | Gated Master ZIP (Syarat Lunas 100%) | Must | 13 SP | ⏳ Antrean | `feat: implementasi gated master zip download dengan expiring token 48 jam` |
+| **PBI-19** | Sprint 4 | Dashboard Analitik Omzet & Direktori Klien | Could | 13 SP | ⏳ Antrean | `feat: implementasi dashboard analitik omzet studio dan direktori pelanggan` |
+| **PBI-20** | Sprint 4 | Full Pentest, Testing 17 FR, Audit & Sidang | Must | 8 SP | ⏳ Antrean | `test: full penetration testing 17 fr, audit lighthouse dan final deployment` |
+| **TOTAL** | **4 Sprints** | **17 FR + 12 Tabel Relasional 3NF + OWASP** | **-** | **215 SP** | **7 / 20 Selesai (33%)** | **TARGET SEGERA: SELESAIKAN PBI-08** |
 
 ---
 
-#### SPRINT 04: Desktop Floating Pill Navbar dengan Dynamic Scroll Morphing (`.jsx`)
-* **Status**: 🟢 **SELESAI & TERVERIFIKASI [x]**
-* **Target Waktu**: Hari 3 | **Story Points**: 8 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi desktop floating pill navbar dengan dynamic scroll dan hover animation"`
-* **Bukti Deliverable di Folder `web/`**:
-  - [x] `web/components/shared/DesktopNavbar.jsx` melayang di `top-6` desktop.
-  - [x] Efek Frosted Glassmorphism (`backdrop-blur-xl bg-neutral-900/75 border border-white/10`).
-  - [x] Dynamic Scroll Morphing: Otomatis menciut menjadi kapsul ringkas saat `window.scrollY > 40px`.
-  - [x] Indikator aktif tab pegas Framer Motion (`layoutId="desktop-active-pill"`).
-  - [x] Animasi Interaktif Kursor: Magnetic sliding hover pill (`layoutId="navbar-hover-pill"`), micro-tilt ikon, cursor spotlight glow, dan shimmering Book Slot button.
-* **🛡️ Hacker Pentest Audit**: Sanitasi link internal native Next.js, aman dari open redirect.
+## 4. DETAIL USER STORY, ACCEPTANCE CRITERIA & AUDIT KEAMANAN (PBI-01 s/d PBI-20)
 
 ---
 
-#### SPRINT 05: Mobile Bottom Tab Bar, Liquid Spring Blob & Glowing FAB (`.jsx`)
-* **Status**: 🟢 **SELESAI & TERVERIFIKASI [x]**
-* **Target Waktu**: Hari 3 | **Story Points**: 8 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi mobile bottom tab bar dengan liquid spring blob dan fab"`
-* **Bukti Deliverable di Folder `web/`**:
-  - [x] `web/components/shared/MobileBottomBar.jsx` menempel ergonomis di bawah layar ponsel (`bottom-4`).
-  - [x] Indikator tab aktif cairan meluncur (*Liquid Spring Blob*).
-  - [x] Floating Action Button (FAB) "Book Slot" berdenyut emas di sisi atas kanan bar mobile.
-  - [x] Halaman utama `web/app/page.js` dan layout terhubung sempurna, `next build` 100% SUKSES!
-* **🛡️ Hacker Pentest Audit**: Debounce navigasi aman dari benturan multi-tap.
+### SPRINT 1: FONDASI, DESIGN TOKENS & NAVIGASI INTERAKTIF (50 SP)
+
+#### PBI-01: Setup Next.js 16, Tailwind CSS v4 & Supabase SDK
+* **Status**: 🟢 **SELESAI & TERVERIFIKASI [x]** | **Bobot**: 8 SP
+* **User Story**: Sebagai pengembang, saya ingin menginisialisasi framework Next.js 16 dan mengintegrasikan Supabase SSR agar fondasi arsitektur siap menampung seluruh fungsionalitas sistem.
+* **Acceptance Criteria**:
+  * *Given* dependensi proyek diunduh, *When* `npm run build` dijalankan, *Then* build sukses 100% tanpa error kompilasi.
+* **Bukti Deliverable**: `package.json`, `.env.local`, `lib/supabase/client.js`, `lib/supabase/server.js`, `lib/utils.js`.
+* **🛡️ Security Audit**: Isolasi secret key berhasil. `SUPABASE_SERVICE_ROLE_KEY` tidak diekspos ke client bundle browser.
+
+#### PBI-02: DDL 12 Tabel Relasional 3NF, Enums, Indeks & RLS Supabase
+* **Status**: 🟢 **SELESAI & TERVERIFIKASI [x]** | **Bobot**: 13 SP
+* **User Story**: Sebagai arsitek basis data, saya ingin merancang skema relasional 12 tabel 3NF dengan isolasi RLS agar data transaksi dan foto privat klien terlindungi secara ketat.
+* **Acceptance Criteria**:
+  * *Given* file DDL PostgreSQL dieksekusi, *When* query select/insert dijalankan antar user berbeda, *Then* RLS menolak akses lintas pengguna (anti cross-tenant injection).
+* **Bukti Deliverable**: `supabase_schema.sql` (12 Tabel: `users`, `customers`, `package_categories`, `packages`, `bookings`, `crew_assignments`, `invoices`, `payments`, `galleries`, `media_assets`, `proofing_selections`, `master_downloads`).
+* **🛡️ Security Audit**: RLS policies menjamin klien tidak dapat melihat data booking atau galeri milik klien lain.
+
+#### PBI-03: Design Tokens, Dark Luxury & Komponen Micro-Interactions
+* **Status**: 🟢 **SELESAI & TERVERIFIKASI [x]** | **Bobot**: 13 SP
+* **User Story**: Sebagai pengguna, saya ingin menikmati antarmuka bertema studio foto mewah dengan feedback visual yang responsif saat berinteraksi.
+* **Acceptance Criteria**:
+  * *Given* pengguna mengklik tombol atau mengarahkan kursor ke kartu, *When* aksi terjadi, *Then* animasi 3D tilt, scale, dan shimmer tampil mulus pada 60 FPS.
+* **Bukti Deliverable**: `globals.css`, `components/ui/AnimatedButton.jsx`, `components/ui/InteractiveCard.jsx`, `components/ui/SkeletonShimmer.jsx`.
+* **🛡️ Security Audit**: `AnimatedButton` menerapkan disabled DOM saat `isLoading = true` untuk mencegah double submission secara visual.
+
+#### PBI-04: Desktop Floating Pill Navbar dengan Dynamic Scroll Morphing
+* **Status**: 🟢 **SELESAI & TERVERIFIKASI [x]** | **Bobot**: 8 SP
+* **User Story**: Sebagai pengunjung desktop, saya ingin navbar melayang yang ringkas dan memiliki animasi kursor agar navigasi antar halaman terasa modern dan elegan.
+* **Acceptance Criteria**:
+  * *Given* halaman di-scroll melewati 40px, *When* posisi scroll berubah, *Then* navbar menciut menjadi kapsul ringkas.
+* **Bukti Deliverable**: `components/shared/DesktopNavbar.jsx` (dilengkapi sliding hover pill & cursor spotlight glow).
+* **🛡️ Security Audit**: Perbaikan runtime error Framer Motion keyframes spring ganda `0,-6,6,0` menjadi 2 keyframe murni.
+
+#### PBI-05: Mobile Bottom Tab Bar, Liquid Spring Blob & Glowing FAB
+* **Status**: 🟢 **SELESAI & TERVERIFIKASI [x]** | **Bobot**: 8 SP
+* **User Story**: Sebagai pengguna smartphone, saya ingin navigasi bawah layar (*bottom bar*) ergonomis agar mudah dijangkau dengan ibu jari satu tangan.
+* **Acceptance Criteria**:
+  * *Given* aplikasi dibuka pada layar ponsel ($\le 768px$), *When* tab ditekan, *Then* blob animasi meluncur ke tab aktif.
+* **Bukti Deliverable**: `components/shared/MobileBottomBar.jsx` dengan Floating Action Button (FAB).
+* **🛡️ Security Audit**: Debounce navigasi mencegah crash akibat spam multi-touch pada mobile viewport.
 
 ---
 
-#### SPRINT 06: Supabase Multi-Role Auth, Registrasi Klien & Middleware (FR-01, FR-02)
-* **Status**: 🎯 **TARGET BERIKUTNYA — SIAP DIGAS! [ ]**
-* **Target Waktu**: Hari 4 | **Story Points**: 13 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi autentikasi multi-role registrasi klien dan route middleware"`
-* **Ketertelusuran**: **FR-01** (Login), **FR-02** (Registrasi Klien) | Tabel `users`, `customers`
-* **Task Teknis yang Akan Dibuat**:
-  1. Halaman Registrasi Klien di `web/app/register/page.jsx`: Input Nama, Email, WhatsApp, Password. Server action `supabase.auth.signUp()`.
-  2. Halaman Login Multi-Role di `web/app/login/page.jsx`: Login email/password dengan auto-redirect Klien vs Admin.
-  3. Session Gatekeeper di `web/middleware.js`: Memverifikasi token JWT Supabase dan memblokir akses rute `/admin/*` dari klien biasa.
-* **🛡️ Hacker Pentest Audit**: Uji coba pemalsuan JWT role, proteksi rate-limiting brute force password, dan validasi email.
+### SPRINT 2: AUTENTIKASI MULTI-ROLE & KATALOG PUBLIK (34 SP)
+
+#### PBI-06: Supabase Multi-Role Auth, Registrasi Klien & Middleware (FR-01, FR-02)
+* **Status**: 🟢 **SELESAI & TERVERIFIKASI [x]** | **Bobot**: 13 SP
+* **User Story**: Sebagai klien baru, saya ingin mendaftarkan akun dengan nomor WhatsApp dan login agar dapat melakukan reservasi dan melihat galeri foto saya.
+* **Acceptance Criteria**:
+  * *Given* klien belum login, *When* mengakses rute `/admin/*` atau `/dashboard/*`, *Then* middleware secara otomatis mengalihkan (*redirect 307*) ke `/login`.
+  * *Given* kredensial valid dimasukkan, *When* login berhasil, *Then* sistem mengarahkan klien ke `/dashboard` dan admin ke `/admin/dashboard`.
+* **Bukti Deliverable**: `app/register/page.jsx`, `app/login/page.jsx`, `lib/actions/auth.js`, `middleware.js`, `lib/supabase/middleware.js`, `app/dashboard/page.jsx`, `app/admin/dashboard/page.jsx`.
+* **🛡️ Security Audit**:
+  * Password di-hash menggunakan standar bcrypt dari Supabase Auth.
+  * Sanitasi parameter `redirect` pada middleware untuk mematikan celah *Open Redirect Vulnerability*.
+
+#### PBI-07: Showcase Katalog Publik & Filter Kategori Dinamis (FR-04 Part 1)
+* **Status**: 🟢 **SELESAI & TERVERIFIKASI [x]** | **Bobot**: 8 SP
+* **User Story**: Sebagai calon pelanggan, saya ingin mencari dan memfilter paket foto berdasarkan kategori dan kata kunci agar dapat memilih layanan yang cocok dengan kebutuhan acara.
+* **Acceptance Criteria**:
+  * *Given* pengguna memilih tab kategori (misal: "Wedding & Akad"), *When* tab diklik, *Then* daftar paket difilter secara instan tanpa reload halaman.
+  * *Given* kata kunci tidak cocok dengan data apapun, *When* dicari, *Then* muncul tampilan empty state bersahabat dengan tombol reset.
+* **Bukti Deliverable**: `app/katalog/page.jsx`, `components/katalog/KatalogView.jsx`.
+* **🛡️ Security Audit**: Parameterized query Supabase PostgREST kebal 100% terhadap SQL Injection pada query filter.
+
+#### PBI-08: Detail Spesifikasi Paket & Dashboard Admin CRUD Layanan (FR-04 Part 2, FR-12)
+* **Status**: 🎯 **TARGET BERIKUTNYA — SIAP DIGAS! [ ]** | **Bobot**: 13 SP
+* **Ketertelusuran**: **FR-04** (Detail Paket), **FR-12** (Admin Kelola Paket) | Tabel `packages`, `package_categories`
+* **User Story**:
+  * Sebagai calon pelanggan, saya ingin melihat rincian detail paket di `/katalog/[slug]` agar mengetahui seluruh fasilitas album, jam sesi, dan ketentuan DP.
+  * Sebagai studio admin, saya ingin menambah, mengubah, dan menonaktifkan paket di `/admin/paket` agar katalog layanan selalu terbarui.
+* **Acceptance Criteria (Gherkin)**:
+  * *Given* slug paket valid, *When* halaman `/katalog/[slug]` dibuka, *Then* data paket, rincian fitur, dan tombol booking slot tampil lengkap.
+  * *Given* user login sebagai Klien, *When* mencoba mengakses `/admin/paket`, *Then* middleware memblokir akses dan mengalihkan ke `/dashboard`.
+  * *Given* admin memasukkan harga $\le 0$, *When* disubmit, *Then* validasi server-side menolak perubahan.
+* **Task Teknis**:
+  1. Halaman detail paket publik di `web/app/katalog/[slug]/page.jsx`.
+  2. Server Actions CRUD paket di `web/lib/actions/packages.js`.
+  3. Antarmuka panel admin kelola paket di `web/app/admin/paket/page.jsx`.
+* **🛡️ Security Audit**: Enforce constraint `price > 0` dan verifikasi Server Action hanya bisa dijalankan oleh sesi dengan role `ADMIN`.
 
 ---
 
-#### SPRINT 07: Showcase Katalog Publik & Filter Kategori Dinamis (FR-04 Part 1)
-* **Status**: ⏳ Antrean [ ]
-* **Target Waktu**: Hari 5 | **Story Points**: 8 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi halaman katalog publik dan filter kategori dinamis"`
-* **Ketertelusuran**: **FR-04** (Katalog Paket) | Tabel `packages`, `package_categories`
-* **Task Teknis**: Halaman `web/app/katalog/page.jsx` dengan tab filter interaktif dan card 3D tilt.
-* **🛡️ Hacker Pentest Audit**: Parameterized query ORM kebal dari SQL Injection pada query filter.
+### SPRINT 3: BOOKING ENGINE & INVOICING FINANSIAL (63 SP)
 
----
+#### PBI-09: Kalender Ketersediaan Sesi & Anti Double-Booking Engine (FR-05 Part 1)
+* **Status**: ⏳ Antrean [ ] | **Bobot**: 13 SP
+* **Ketertelusuran**: **FR-05** (Cek Slot Sesi) | Tabel `bookings` | Sequence Diagram SD-01
+* **User Story**: Sebagai klien, saya ingin melihat tanggal dan jam sesi yang masih tersedia pada kalender interaktif agar jadwal pemotretan saya tidak bentrok dengan orang lain.
+* **Acceptance Criteria (Gherkin)**:
+  * *Given* slot waktu sudah dipesan klien lain dengan status `CONFIRMED` atau `PENDING_DP`, *When* klien baru memilih tanggal dan jam tersebut, *Then* slot ditandai merah (*Booked*) dan tombol pesan dinonaktifkan.
+* **Task Teknis**: Komponen `web/components/booking/BookingCalendar.jsx` terhubung ke Stored Procedure PostgreSQL `check_slot_availability(p_date, p_start, p_end)`.
+* **🛡️ Security Audit**: Row-level locking PostgreSQL (`FOR UPDATE`) pada saat pengecekan slot untuk mematikan celah race-condition serbuan booking serentak.
 
-#### SPRINT 08: Detail Spesifikasi Paket & Dashboard Admin CRUD Layanan (FR-04 Part 2, FR-12)
-* **Status**: ⏳ Antrean [ ]
-* **Target Waktu**: Hari 5 | **Story Points**: 13 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi detail spesifikasi paket dan dashboard admin crud layanan"`
-* **Ketertelusuran**: **FR-04** (Detail Paket), **FR-12** (Admin Kelola Paket) | Tabel `packages`
-* **Task Teknis**: `web/app/katalog/[slug]/page.jsx` dan panel admin di `web/app/admin/paket/page.jsx`.
-* **🛡️ Hacker Pentest Audit**: Validasi server-side constraint harga $> 0$ dan RLS hanya admin yang bisa edit/hapus.
-
----
-
-#### SPRINT 09: Kalender Ketersediaan Sesi & Anti Double-Booking Engine (FR-05 Part 1)
-* **Status**: ⏳ Antrean [ ]
-* **Target Waktu**: Hari 6 | **Story Points**: 13 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi kalender ketersediaan slot dan fungsi anti double booking"`
-* **Ketertelusuran**: **FR-05** (Cek Slot & Booking) | Tabel `bookings` | Sequence Diagram SD-01
-* **Task Teknis**: Komponen kalender `web/components/booking/BookingCalendar.jsx` terhubung ke stored function PostgreSQL `check_slot_availability`.
-* **🛡️ Hacker Pentest Audit**: Row-locking PostgreSQL mematikan celah race-condition serbuan booking bersamaan.
-
----
-
-#### SPRINT 10: Multi-Step Booking Wizard & Order Generation (FR-05 Part 2)
-* **Status**: ⏳ Antrean [ ]
-* **Target Waktu**: Hari 7 | **Story Points**: 13 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi multi-step booking wizard dan invoice code generator"`
+#### PBI-10: Multi-Step Booking Wizard & Kode Order Unik (FR-05 Part 2)
+* **Status**: ⏳ Antrean [ ] | **Bobot**: 13 SP
 * **Ketertelusuran**: **FR-05** (Pengajuan Booking) | Tabel `bookings`, `invoices`
-* **Task Teknis**: Wizard pemesanan 4 tahap di `web/app/booking/page.jsx` dan generate invoice status `UNPAID`.
-* **🛡️ Hacker Pentest Audit**: Kalkulasi DP dihitung murni di server side (anti tampering payload).
+* **User Story**: Sebagai klien, saya ingin mengisi formulir booking dalam tahapan yang jelas (Paket $\rightarrow$ Jadwal $\rightarrow$ Lokasi/Alamat $\rightarrow$ Konfirmasi Ringkasan) agar pemesanan selesai tanpa kebingungan.
+* **Acceptance Criteria (Gherkin)**:
+  * *Given* data formulir lengkap, *When* klien menekan tombol konfirmasi, *Then* sistem meng-generate kode booking unik (format `IX-YYYYMMDD-XXXX`) dan invoice status `UNPAID`.
+* **Task Teknis**: Multi-step wizard di `web/app/booking/page.jsx` dan Server Action transaksi booking di `web/lib/actions/booking.js`.
+* **🛡️ Security Audit**: Nilai total harga dan kalkulasi DP dihitung murni di server-side (anti tampering payload manipulasi harga dari client-side request).
+
+#### PBI-11: Dashboard Riwayat Booking Klien & Aturan Pembatalan H-3 (FR-06, FR-07)
+* **Status**: ⏳ Antrean [ ] | **Bobot**: 8 SP
+* **Ketertelusuran**: **FR-06** (Riwayat Booking), **FR-07** (Aturan Pembatalan H-3) | Sequence Diagram SD-05
+* **User Story**: Sebagai klien, saya ingin melihat daftar riwayat booking dan memiliki opsi membatalkan pesanan selama masih memenuhi batas minimal H-3 dari tanggal pemotretan.
+* **Acceptance Criteria (Gherkin)**:
+  * *Given* selisih tanggal sesi dengan hari ini $\ge 3$ hari `(session_date - CURRENT_DATE >= 3)`, *When* klien mengajukan pembatalan, *Then* status pesanan berubah menjadi `CANCELLED`.
+  * *Given* selisih hari $< 3$ hari (H-2 atau H-1), *When* klien mencoba membatalkan, *Then* sistem menolak pembatalan dengan pesan kebijakan pembatalan studio.
+* **Task Teknis**: `web/app/dashboard/riwayat/page.jsx` dengan validasi server-side formula: `(session_date::date - CURRENT_DATE) >= 3`.
+* **🛡️ Security Audit**: IDOR Defense — Memverifikasi bahwa `customer_id` booking yang dibatalkan mutlak cocok dengan `auth.uid()` user yang sedang aktif.
+
+#### PBI-12: Digital Invoicing Engine (DP & Sisa Pelunasan) & Salin Rekening (FR-08 Part 1)
+* **Status**: ⏳ Antrean [ ] | **Bobot**: 8 SP
+* **Ketertelusuran**: **FR-08** (Tagihan Digital Invoice) | Tabel `invoices`
+* **User Story**: Sebagai klien, saya ingin melihat rincian tagihan digital resmi dengan batas waktu pembayaran dan tombol 1-klik salin nomor rekening bank studio Iluxy Creative.
+* **Acceptance Criteria (Gherkin)**:
+  * *Given* invoice diterbitkan, *When* halaman invoice dibuka, *Then* rincian biaya DP, sisa tagihan, dan nomor rekening Bank Nagari / BCA studio tampil rapi.
+* **Task Teknis**: Halaman `web/app/invoice/[id]/page.jsx` dan utilitas clipboard salin rekening dengan animasi haptic/toast.
+* **🛡️ Security Audit**: RLS Policy `Customer View Own Invoices` memastikan invoice hanya dapat diakses oleh klien yang bersangkutan dan admin.
+
+#### PBI-13: Dropzone Upload Struk Pembayaran & Supabase Storage (FR-08 Part 2)
+* **Status**: ⏳ Antrean [ ] | **Bobot**: 8 SP
+* **Ketertelusuran**: **FR-08** (Unggah Bukti Transfer) | Tabel `payments`, Bucket `payment-proofs`
+* **User Story**: Sebagai klien, saya ingin mengunggah foto struk/tangkapan layar m-banking bukti pembayaran DP atau pelunasan dengan kompresi otomatis agar hemat kuota.
+* **Acceptance Criteria (Gherkin)**:
+  * *Given* file gambar struk dipilih klien, *When* diunggah, *Then* gambar dikompresi di browser via `browser-image-compression`, disimpan ke bucket privat, dan status pembayaran berubah menjadi `PENDING_VERIFICATION`.
+* **Task Teknis**: Modal dropzone di `web/components/payment/PaymentUploadModal.jsx` dan Server Action upload bukti bayar.
+* **🛡️ Security Audit**:
+  * Validasi *magic bytes* MIME-type riil (hanya mengizinkan JPEG/PNG/WebP, memblokir berkas `.php`, `.sh`, `.exe`, atau `.svg` berisiko XSS).
+  * Pengubahan nama file menjadi UUID acak di bucket privat (mencegah penimpaan file / path traversal).
+
+#### PBI-14: Panel Admin Verifikasi Pembayaran & Penugasan Kru Fotografer (FR-14, FR-15)
+* **Status**: ⏳ Antrean [ ] | **Bobot**: 13 SP
+* **Ketertelusuran**: **FR-14** (Penugasan Kru), **FR-15** (Verifikasi Pembayaran) | Tabel `payments`, `crew_assignments`, `bookings`
+* **User Story**: Sebagai studio admin, saya ingin memeriksa keabsahan bukti bayar pada split-screen pratinjau dan menugaskan fotografer/videographer agar jadwal pemotretan terorganisir.
+* **Acceptance Criteria (Gherkin)**:
+  * *Given* admin mengklik "Verifikasi Sah", *When* aksi disetujui, *Then* status invoice DP berubah menjadi `PAID` / `PARTIALLY_PAID`, status booking menjadi `CONFIRMED`, dan nama kru tersimpan.
+* **Task Teknis**: Halaman `web/app/admin/verifikasi/page.jsx` dan Server Action penugasan kru di `web/lib/actions/crew.js`.
+* **🛡️ Security Audit**: Proteksi CSRF Server Action; mutasi status pembayaran wajib memverifikasi session role `ADMIN`.
 
 ---
 
-#### SPRINT 11: Dashboard Riwayat Booking Klien & Aturan Pembatalan H-3 (FR-06, FR-07)
-* **Status**: ⏳ Antrean [ ]
-* **Target Waktu**: Hari 7 | **Story Points**: 8 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi dashboard riwayat booking klien dan validasi pembatalan h-3"`
-* **Ketertelusuran**: **FR-06** (Riwayat), **FR-07** (Batal H-3) | Sequence Diagram SD-05
-* **Task Teknis**: `web/app/dashboard/riwayat/page.jsx` dengan validasi server waktu `NOW() - session_date >= 3`.
-* **🛡️ Hacker Pentest Audit**: Penolakan pembatalan pada H-2 / H-1 dan pemblokiran IDOR pembatalan akun orang lain.
+### SPRINT 4: PRIVATE GALLERY, PROOFING & KESIAPAN SIDANG (68 SP)
 
----
+#### PBI-15: Admin Chunked Mass Photo Upload & Auto-Watermark Engine (FR-16)
+* **Status**: ⏳ Antrean [ ] | **Bobot**: 13 SP
+* **Ketertelusuran**: **FR-16** (Mass Upload Foto Galeri) | Tabel `galleries`, `media_assets`, Bucket `gallery-watermarked`
+* **User Story**: Sebagai studio admin, saya ingin mengunggah 50–200 foto hasil jepretan secara massal (*batch upload*) dengan otomatisasi stempel watermark hak cipta studio.
+* **Acceptance Criteria (Gherkin)**:
+  * *Given* folder foto sesi dipilih admin, *When* diunggah, *Then* proses berjalan secara chunked (per 5–10 file) dengan progress bar dan otomatis menempelkan watermark "ILUXY CREATIVE".
+* **Task Teknis**: `web/app/admin/galeri/upload/[bookingId]/page.jsx` dan utilitas client-side canvas watermarking sebelum transfer storage.
+* **🛡️ Security Audit**: Menghapus metadata EXIF GPS privat dari file foto klien demi perlindungan privasi privasi lokasi pelanggan.
 
-### MINGGU 2: FINANSIAL, PRIVATE GALLERY, PROOFING & SIDANG
+#### PBI-16: Gerbang Akses Private Gallery PIN 6-Digit & Masonry Layout (FR-09)
+* **Status**: ⏳ Antrean [ ] | **Bobot**: 8 SP
+* **Ketertelusuran**: **FR-09** (Akses Galeri Ber-PIN) | Tabel `galleries` | Sequence Diagram SD-03
+* **User Story**: Sebagai klien, saya ingin membuka galeri foto privat acara saya dengan memasukkan PIN 6 digit unik agar foto saya tidak dapat diintip oleh publik sembarangan.
+* **Acceptance Criteria (Gherkin)**:
+  * *Given* klien memasukkan PIN 6 digit yang benar, *When* divalidasi, *Then* galeri terbuka dengan tampilan layout grid masonry yang elegan.
+  * *Given* PIN salah dimasukkan, *When* disubmit, *Then* input bergetar (*OTP shake animation*) dan akses ditolak.
+* **Task Teknis**: Modal `web/components/gallery/PinGateModal.jsx` dan halaman galeri `web/app/galeri/[slug]/page.jsx`.
+* **🛡️ Security Audit**: Rate-limiting lockout — Kunci sesi input PIN selama 15 menit jika terjadi 5 kali kegagalan berturut-turut (anti brute force PIN).
 
-#### SPRINT 12: Digital Invoicing Engine (DP & Sisa Pelunasan) & Salin Rekening (FR-08 Part 1)
-* **Status**: ⏳ Antrean [ ]
-* **Target Waktu**: Hari 8 | **Story Points**: 8 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi digital invoicing engine dp dan pelunasan serta salin rekening"`
-* **Ketertelusuran**: **FR-08** (Tagihan Invoice) | Tabel `invoices`
-* **Task Teknis**: Halaman `web/app/invoice/[id]/page.jsx`, rincian biaya DP & pelunasan, tombol 1-click copy rekening.
-* **🛡️ Hacker Pentest Audit**: IDOR protection memastikan invoice hanya dapat dibaca oleh pemilik sah dan admin.
-
----
-
-#### SPRINT 13: Dropzone Upload Struk Pembayaran & Supabase Storage (FR-08 Part 2)
-* **Status**: ⏳ Antrean [ ]
-* **Target Waktu**: Hari 9 | **Story Points**: 8 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi dropzone upload bukti transfer dan kompresi gambar"`
-* **Ketertelusuran**: **FR-08** (Unggah Bukti Transfer) | Tabel `payments`, Storage `payment-proofs`
-* **Task Teknis**: `web/components/payment/PaymentUploadModal.jsx`, kompresi client-side, dan simpan di bucket privat.
-* **🛡️ Hacker Pentest Audit**: Validasi MIME-type riil (blokir shell script & SVG XSS) serta rename UUID acak.
-
----
-
-#### SPRINT 14: Panel Admin Verifikasi Pembayaran & Penugasan Kru (FR-14, FR-15)
-* **Status**: ⏳ Antrean [ ]
-* **Target Waktu**: Hari 9 | **Story Points**: 13 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi panel admin verifikasi pembayaran dan penugasan kru fotografer"`
-* **Ketertelusuran**: **FR-14** (Kru), **FR-15** (Verifikasi Pembayaran) | Tabel `payments`, `crew_assignments`
-* **Task Teknis**: `web/app/admin/verifikasi/page.jsx` split screen pratinjau bukti transfer dan penugasan fotografer.
-* **🛡️ Hacker Pentest Audit**: Proteksi CSRF Server Actions; aksi verifikasi hanya valid dengan token admin.
-
----
-
-#### SPRINT 15: Admin Chunked Mass Photo Upload & Auto-Watermark Engine (FR-16)
-* **Status**: ⏳ Antrean [ ]
-* **Target Waktu**: Hari 10 | **Story Points**: 13 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi chunked mass upload foto galeri dan auto watermark engine"`
-* **Ketertelusuran**: **FR-16** (Admin Upload Galeri) | Tabel `galleries`, `media_assets`
-* **Task Teknis**: `web/app/admin/galeri/upload/[bookingId]/page.jsx`, upload batch 50-200 foto, dan stempel watermark.
-* **🛡️ Hacker Pentest Audit**: Stripping metadata EXIF GPS privat klien dan limitasi ukuran file (anti storage exhaustion).
-
----
-
-#### SPRINT 16: Gerbang Akses Private Gallery PIN 6-Digit & Masonry Grid Layout (FR-09)
-* **Status**: ⏳ Antrean [ ]
-* **Target Waktu**: Hari 11 | **Story Points**: 8 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi gerbang akses private gallery pin 6 digit dan masonry layout"`
-* **Ketertelusuran**: **FR-09** (Akses Private Gallery PIN) | Tabel `galleries` | Sequence Diagram SD-03
-* **Task Teknis**: `web/components/gallery/PinGateModal.jsx` (OTP 6 digit shake on error) & `web/app/galeri/[slug]/page.jsx`.
-* **🛡️ Hacker Pentest Audit**: Rate limit lockout setelah 5x salah PIN dan isolasi file original di bucket terkunci.
-
----
-
-#### SPRINT 17: Kurasi Foto Cetak Album (Proofing), Quota Counter & Retouch Notes (FR-10)
-* **Status**: ⏳ Antrean [ ]
-* **Target Waktu**: Hari 12 | **Story Points**: 13 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi kurasi foto proofing cetak album dan catatan retouch"`
+#### PBI-17: Kurasi Foto Cetak Album (Proofing), Quota Counter & Retouch Notes (FR-10)
+* **Status**: ⏳ Antrean [ ] | **Bobot**: 13 SP
 * **Ketertelusuran**: **FR-10** (Kurasi Foto Proofing) | Tabel `proofing_selections`
-* **Task Teknis**: `web/components/gallery/ProofingToolbar.jsx` (Counter kuota floating), modal catatan retouch, dan finalisasi.
-* **🛡️ Hacker Pentest Audit**: Server-side count validation (menolak seleksi melebihi kuota paket) & sanitasi XSS catatan.
+* **User Story**: Sebagai klien, saya ingin menandai foto favorit untuk dicetak ke dalam album kolase, melihat counter sisa kuota foto, dan menyisipkan catatan retouch khusus per foto.
+* **Acceptance Criteria (Gherkin)**:
+  * *Given* kuota cetak paket adalah 25 foto, *When* klien memilih foto ke-26, *Then* sistem menolak centang dan memberi notifikasi bahwa kuota paket telah tercapai.
+  * *Given* klien mengklik "Finalisasi Kurasi", *When* disubmit, *Then* daftar foto pilihan terkunci dan terkirim ke editor studio.
+* **Task Teknis**: Floating toolbar `web/components/gallery/ProofingToolbar.jsx` dan modal catatan retouch di `web/components/gallery/RetouchNoteModal.jsx`.
+* **🛡️ Security Audit**: Validasi batas kuota dihitung ulang secara mutlak di sisi server (mencegah manipulasi angka kuota via inspect element).
+
+#### PBI-18: Gated Master ZIP Generation & Expiring Download Tokens (FR-11)
+* **Status**: ⏳ Antrean [ ] | **Bobot**: 13 SP
+* **Ketertelusuran**: **FR-11** (Unduh Master ZIP Full-Res) | Tabel `master_downloads`, `invoices`
+* **User Story**: Sebagai klien yang telah melunasi pembayaran 100%, saya ingin mengunduh seluruh arsip foto original resolusi tinggi dalam satu file ZIP dengan link unduh aman yang berlaku 48 jam.
+* **Acceptance Criteria (Gherkin)**:
+  * *Given* status invoice masih `UNPAID` atau `PARTIALLY_PAID`, *When* klien menekan tombol unduh master, *Then* unduhan diblokir dengan instruksi pelunasan tagihan.
+  * *Given* invoice sudah `PAID`, *When* ditekan, *Then* sistem menerbitkan signed URL / token unduhan aktif selama 48 jam.
+* **Task Teknis**: Route handler `web/app/api/gallery/download/[token]/route.js` dan gating logic pelunasan.
+* **🛡️ Security Audit**: Pemblokiran mutlak unduhan file resolusi tinggi sebelum verifikasi pelunasan 100% dan penolakan token yang telah kedaluwarsa.
+
+#### PBI-19: Dashboard Analitik Eksekutif Studio & Direktori Pelanggan (FR-03, FR-13, FR-17)
+* **Status**: ⏳ Antrean [ ] | **Bobot**: 13 SP
+* **Ketertelusuran**: **FR-03** (Profil), **FR-13** (Direktori Klien), **FR-17** (Dashboard Omzet Studio)
+* **User Story**: Sebagai pemilik studio Iluxy Creative, saya ingin memantau grafik tren omzet bulanan, paket terlaris, dan daftar kontak pelanggan loyal untuk keperluan evaluasi bisnis.
+* **Acceptance Criteria (Gherkin)**:
+  * *Given* admin membuka dashboard, *When* dimuat, *Then* grafik garis/batang Recharts menampilkan ringkasan pendapatan kotor, jumlah sesi selesai, dan tabel data pelanggan.
+* **Task Teknis**: Visualisasi Recharts di `web/app/admin/dashboard/page.jsx` dan tabel pelanggan di `web/app/admin/pelanggan/page.jsx`.
+* **🛡️ Security Audit**: Proteksi data pribadi PII pelanggan (nomor telepon & alamat dienkripsi saat transit) dan pembatasan rute analitik hanya untuk admin.
+
+#### PBI-20: Full Penetration Testing, Lighthouse Audit, Seeding & Kesiapan Sidang
+* **Status**: ⏳ Antrean [ ] | **Bobot**: 8 SP
+* **Fokus**: Final Security Sign-off, Google Lighthouse Score $\ge 90$, Seeding Data Uji Coba Sidang, dan Live Deployment Production.
+* **Task Teknis**:
+  1. Audit performa Lighthouse (Performance, Accessibility, Best Practices, SEO).
+  2. Database seeding akun demo penguji:
+     * Akun Klien Demo: `klien@iluxycreative.com` / `Klien123!`
+     * Akun Admin Demo: `admin@iluxycreative.com` / `Admin123!`
+  3. Simulasi skenario sidang (Alur Booking $\rightarrow$ Verifikasi DP $\rightarrow$ Upload Galeri $\rightarrow$ Kurasi Proofing $\rightarrow$ Unduh ZIP).
+  4. Final deployment ke Vercel Production dengan environment variables terisolasi.
+* **🛡️ Security Audit**: Pengujian menyeluruh 17 Functional Requirements bebas dari OWASP Top 10 Vulnerabilities (Zero Critical Bug).
 
 ---
 
-#### SPRINT 18: Gated Master ZIP Generation & Expiring Download Tokens (FR-11)
-* **Status**: ⏳ Antrean [ ]
-* **Target Waktu**: Hari 13 | **Story Points**: 13 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi gated master zip download dengan expiring token 48 jam"`
-* **Ketertelusuran**: **FR-11** (Unduh Master ZIP) | Tabel `master_downloads`, `invoices`
-* **Task Teknis**: Gating status invoice `PAID`, generator token unduh 48 jam di `web/app/api/gallery/download/[token]/route.js`.
-* **🛡️ Hacker Pentest Audit**: Pemblokiran mutlak download sebelum pelunasan 100% dan penolakan token basi.
+## 5. MATRIKS MANAJEMEN RISIKO TEKNIS & STRATEGI MITIGASI
+
+| ID | Kategori Risiko | Deskripsi Risiko Teknis | Probabilitas | Dampak | Strategi Mitigasi Teruji |
+|:---:|:---|:---|:---:|:---:|:---|
+| **R-01** | **Serverless Timeout** | Upload massal 100+ foto resolusi tinggi berpotensi timeout di serverless function (batas Vercel 10–60 detik). | Tinggi | Kritis | **Client-side Chunked Direct Upload**: File diunggah langsung dari browser klien ke Supabase Storage via signed URL (melewati backend Vercel). |
+| **R-02** | **Memory Exhaustion (ZIP)** | Membuat file ZIP berisi ratusan foto master di memori server dapat menyebabkan crash *Out of Memory*. | Sedang | Kritis | Batasi pembuatan arsip ZIP per album atau gunakan streaming JSZip / Supabase Storage Archive generator. |
+| **R-03** | **Concurrency Race Condition** | Dua pelanggan memesan slot jam yang persis sama dalam detik yang bersamaan. | Sedang | Tinggi | Terapkan transaksi PostgreSQL `SELECT ... FOR UPDATE` pada Stored Procedure `check_slot_availability` untuk mengunci baris slot. |
+| **R-04** | **IDOR Private Gallery** | Klien iseng mengganti URL/ID galeri di browser untuk mengintip foto privat orang lain. | Sedang | Kritis | Validasi gerbang otorisasi ganda: Sesi user wajib cocok dengan `customer_id` ATAU wajib memasukkan PIN 6 digit yang valid di tabel `galleries`. |
+| **R-05** | **Storage Quota & Abuse** | Upload file palsu (.exe, .sh) atau file berukuran raksasa yang menghabiskan kuota Supabase Storage. | Rendah | Tinggi | Batasi ukuran maksimal 15MB/foto, periksa *magic bytes* MIME-type asli di client & server, dan tolak ekstensi berbahaya. |
 
 ---
 
-#### SPRINT 19: Dashboard Analitik Eksekutif Studio & Direktori Pelanggan (FR-03, FR-13, FR-17)
-* **Status**: ⏳ Antrean [ ]
-* **Target Waktu**: Hari 13 | **Story Points**: 13 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "feat: implementasi dashboard analitik omzet studio dan direktori pelanggan"`
-* **Ketertelusuran**: **FR-03** (Profil), **FR-13** (Direktori), **FR-17** (Dashboard Admin)
-* **Task Teknis**: `web/app/admin/dashboard/page.jsx` grafik omzet Recharts dan `web/app/admin/pelanggan/page.jsx`.
-* **🛡️ Hacker Pentest Audit**: Proteksi data pribadi PII pelanggan dan verifikasi bcrypt sandi lama saat ganti password.
+## 6. MATRIKS AUDIT KEAMANAN BERTAHAP (SHIFT-LEFT SECURITY TESTING)
+
+Keamanan tidak ditumpuk di akhir proyek, melainkan diuji pada setiap modul selesai:
+
+| Sprint / PBI | Vektor Serangan yang Diuji | Metodologi & Alat Pengujian | Kriteria Lolos Audit | Bukti Hasil Uji |
+|:---:|:---|:---|:---|:---:|
+| **PBI-01 & 02** | *Secret Key Leakage & Cross-Tenant Data Leak* | Source code scanning & SQL injection payload test | Tidak ada `SERVICE_ROLE_KEY` di bundle; RLS memblokir query tanpa token | 🟢 **Lolos (Pass)** |
+| **PBI-04** | *UI Runtime Animation Crash* | Testing keyframe array pada Framer Motion spring | Zero console warning; animasi berjalan mulus pada 60 FPS | 🟢 **Lolos (Pass)** |
+| **PBI-06** | *Open Redirect & Brute Force Password* | Manipulasi query param `?redirect=//evil.com` & burp suite brute-force | Sistem menolak redirect eksternal; rate limit Supabase aktif | 🟢 **Lolos (Pass)** |
+| **PBI-07** | *SQL Injection via Filter Query* | Injeksi kutip `' OR 1=1 --` pada input pencarian katalog | Input disanitasi otomatis oleh ORM Supabase PostgREST | 🟢 **Lolos (Pass)** |
+| **PBI-09 & 10** | *Double-Booking Race Condition & Price Tampering* | Mengirim 2 request booking paralel di detik yang sama; modifikasi payload harga | Hanya 1 booking berhasil; total harga dihitung ulang oleh server | ⏳ Diuji di Sprint 3 |
+| **PBI-11** | *IDOR Pembatalan Jadwal Klien Lain* | Mengganti `booking_id` milik akun lain pada request pembatalan | Server menolak dengan error 403 Forbidden | ⏳ Diuji di Sprint 3 |
+| **PBI-13** | *Malicious File Upload (Web Shell / SVG XSS)* | Mengunggah file `.php` atau `.svg` berisi `<script>alert(1)</script>` | Sistem menolak file non-gambar (hanya JPG, PNG, WebP) | ⏳ Diuji di Sprint 3 |
+| **PBI-16** | *Brute Force PIN 6-Digit Galeri* | Script loop 1.000 kombinasi PIN otomatis | Akun di-lockout setelah 5x percobaan salah berturut-turut | ⏳ Diuji di Sprint 4 |
+| **PBI-18** | *Unauthorized Master Photo Download* | Mengakses endpoint unduh master ZIP sebelum invoice lunas | Server mengembalikan respons 402 Payment Required | ⏳ Diuji di Sprint 4 |
 
 ---
 
-#### SPRINT 20: Full Penetration Testing, Lighthouse Audit, Seeding & Kesiapan Sidang
-* **Status**: ⏳ Antrean [ ]
-* **Target Waktu**: Hari 14 | **Story Points**: 8 SP
-* 💬 **Nama Komentar Commit (Git)**: `git commit -m "test: full penetration testing 17 fr, audit lighthouse dan final deployment"`
-* **Fokus**: Final security sign-off, audit performa Google Lighthouse, dan penyiapan akun demonstrasi di depan dosen penguji.
-* **Task Teknis**: Audit Lighthouse score $\ge 90$, seeding akun demo Admin & Klien, deployment Vercel Production.
-* **🛡️ Hacker Pentest Audit**: Pengujian menyeluruh 17 FR, OWASP Top 10 pass 100%, Zero Bug Kritis.
+## 7. STANDAR KONVENSI PESAN COMMIT (GIT CONVENTIONS)
 
----
-
-## 3. STANDAR KONVENSI PESAN COMMIT (GIT COMMIT CONVENTIONS)
-
-Untuk menjaga kerapian riwayat commit pada repository Git dan standarisasi pelacakan sprint antar anggota/pengembang, seluruh commit wajib mematuhi aturan konvensi berikut:
+Seluruh pengerjaan wajib menggunakan format pesan commit terstandarisasi untuk mempermudah pelacakan audit:
 
 ### Format Penulisan:
 ```
-<kategori>: <indikasi pesan commit / dampak>
+<kategori>: <indikasi pesan commit / dampak perubahan>
 ```
 
 ### Tabel Klasifikasi Kategori:
 
-| Kategori | Indikasi Pesan Commit / Dampak |
-| :--- | :--- |
-| **feat** | Penambahan fitur baru |
-| **fix** | Perbaikan bug |
-| **refactor** | Perubahan struktur tanpa ubah fungsi |
-| **docs** | Perubahan dokumentasi |
-| **test** | Tambahan/modifikasi testing |
-| **chore** | Pembaruan minor (config, dsb.) |
+| Kategori | Indikasi Pesan Commit / Dampak | Contoh Penggunaan Nyata |
+| :--- | :--- | :--- |
+| **`feat`** | Penambahan fitur baru sistem | `feat: implementasi detail spesifikasi paket dan dashboard admin crud layanan` |
+| **`fix`** | Perbaikan bug atau celah logika | `fix: perbaiki formula validasi pembatalan h-3 dan sanitize redirect url` |
+| **`refactor`** | Perubahan struktur kode tanpa ubah fungsi | `refactor: modularisasi komponen filter katalog ke KatalogView.jsx` |
+| **`docs`** | Pembaruan dokumen & perencanaan | `docs: restrukturisasi master sprint planning ke 4 sprint scrum profesional` |
+| **`test`** | Penambahan atau perbaikan skenario uji | `test: integrasi skenario pengujian anti double booking slot sesi` |
+| **`chore`** | Pembaruan minor (config, dependensi) | `chore: perbarui konfigurasi tailwind v4 dan supabase client` |
 
-### Contoh Penggunaan:
-* `feat: Membuat halaman login`
-* `fix: Memperbaiki error pada view dashboard`
-* `feat: Menambahkan animasi sliding hover dan cursor spotlight pada DesktopNavbar`
-* `docs: Menambahkan standar konvensi commit pada sprint planning dan README`
-* `chore: Pembaruan konfigurasi Tailwind CSS dan dependensi package.json`
-* `refactor: Penyesuaian struktur komponen layout dan navigasi`
+---
 
+## 8. CATATAN SPRINT REVIEW & RETROSPECTIVE (H-1 s/d H-8)
+
+### Sprint 1 Review & Retro (13 - 15 Nov):
+* **Pencapaian**: Fondasi Next.js 16, 12 tabel Supabase 3NF, design system Dark Luxury, dan Desktop/Mobile bar selesai 100% (50 SP).
+* **Kendala yang Ditemukan**: Sempat terjadi runtime error pada Framer Motion spring karena keyframe array `[0, -6, 6, 0]`.
+* **Action Item / Perbaikan**: Standardisasi transisi pegas menjadi 2 titik keyframe murni pada semua komponen interaktif.
+
+### Sprint 2 Review & Retro (16 - 20 Nov):
+* **Pencapaian**: Multi-role Auth (PBI-06) dan Showcase Katalog Publik (PBI-07) selesai dan terintegrasi basis data live (21 SP).
+* **Kendala yang Ditemukan**:
+  1. Terjadi error `Invalid path specified in request URI.` karena akhiran `/rest/v1/` pada URL Supabase di `.env.local`.
+  2. Velocity tim (9–10 SP/hari) membutuhkan akselerasi agar sisa 144 SP selesai tepat waktu sebelum 27 November.
+* **Action Item / Perbaikan**:
+  1. Membersihkan URL Supabase di `.env.local` dan menonaktifkan konfirmasi email untuk mempercepat proses uji coba.
+  2. Fokus pada **Must Have features** (PBI-08 Detail Paket, disusul Sprint 3 Booking & Invoice) sebagai Critical Path sidang.

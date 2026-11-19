@@ -77,6 +77,19 @@ git commit -m "chore: Konfigurasi Tailwind CSS dan update package-lock"
 > [!TIP]
 > **Petunjuk Update**: Setiap kali melakukan push atau menyelesaikan sprint/fitur baru, tambahkan catatan perubahan di bagian paling atas riwayat di bawah ini menggunakan kategori commit yang relevan (`feat`, `fix`, `refactor`, `docs`, `test`, `chore`).
 
+### [20 November 2026] - Showcase Katalog Publik & Filter Kategori Dinamis (Sprint 07)
+* `feat`: Implementasi halaman katalog publik di `app/katalog/page.jsx` terintegrasi langsung dengan Supabase PostgreSQL.
+* `feat`: Pembuatan komponen `components/katalog/KatalogView.jsx` dengan fitur live search kata kunci, tab filter kategori dinamis, dan sorting harga/durasi.
+* `feat`: Tampilan kartu paket fotografi interaktif (`InteractiveCard`) dengan efek 3D tilt kursor, spesifikasi jam sesi, kuota retouch, dan breakdown DP.
+* `feat`: Penambahan empty state responsif saat paket tidak ditemukan dan banner direct konsultasi WhatsApp studio.
+
+### [15 November 2026] - Autentikasi Multi-Role & Route Middleware (Sprint 06)
+* `feat`: Implementasi autentikasi Supabase multi-role (Klien vs Admin) dan helper server action di `lib/actions/auth.js`.
+* `feat`: Pembuatan halaman registrasi klien baru di `app/register/page.jsx` dengan validasi nomor WhatsApp dan konfirmasi kata sandi.
+* `feat`: Pembuatan halaman login multi-role di `app/login/page.jsx` dengan preset demo instan (Klien/Admin) untuk kebutuhan sidang.
+* `feat`: Implementasi `middleware.js` & `lib/supabase/middleware.js` untuk proteksi rute otomatis (`/admin/*` dan `/dashboard/*`) berbasis JWT token.
+* `feat`: Pembuatan antarmuka dashboard klien terproteksi (`app/dashboard/`) dan dashboard studio admin (`app/admin/dashboard/`) sesuai standar Suspense streaming Next.js 16.
+
 ### [15 November 2026] - Upgrade Animasi Navigasi & Standarisasi Git
 * `feat`: Menambahkan animasi magnetic sliding hover pill (`layoutId="navbar-hover-pill"`) pada `DesktopNavbar.jsx`.
 * `feat`: Menambahkan efek real-time cursor spotlight glow mengikuti pergerakan kursor mouse.
