@@ -41,6 +41,18 @@ Buka browser di [http://localhost:3000](http://localhost:3000) untuk melihat apl
 
 ---
 
+## 🔑 Akun Uji Coba Demo Sidang (Demo Accounts)
+
+Untuk pengujian lancar pada saat demonstrasi sidang skripsi / proyek akhir:
+
+| Peran (Role) | Email Login | Password | Hak Akses Utama |
+|:---|:---|:---|:---|
+| **Studio Administrator** | `admin@iluxycreative.com` | `Admin123!` | `/admin/dashboard`, verifikasi DP, kru foto, upload watermark, analitik omzet |
+| **Klien Terdaftar** | `klien@iluxycreative.com` | `Klien123!` | `/dashboard`, booking slot, invoice digital, private gallery PIN, proofing |
+| **Akses Galeri Privat** | Slug: `/galeri/wedding-siti-fajar` | **PIN**: `123456` | Gerbang PIN 6-digit, kurasi album, gated master ZIP download |
+
+---
+
 ## 📌 Standar Konvensi Pesan Commit (Git Commit Conventions)
 
 Setiap pengembang yang berkontribusi pada repositori ini **wajib** menggunakan format pesan commit terstandarisasi untuk mempermudah pelacakan histori, review kode, dan audit sprint:
@@ -76,6 +88,17 @@ git commit -m "chore: Konfigurasi Tailwind CSS dan update package-lock"
 
 > [!TIP]
 > **Petunjuk Update**: Setiap kali melakukan push atau menyelesaikan sprint/fitur baru, tambahkan catatan perubahan di bagian paling atas riwayat di bawah ini menggunakan kategori commit yang relevan (`feat`, `fix`, `refactor`, `docs`, `test`, `chore`).
+
+### [25 - 27 November 2026] - Private Gallery, Proofing Album, Watermark Engine & Analitik Omzet (Sprint 4: PBI-15 s/d PBI-20 - 100% TUNTAS)
+* `feat`: Implementasi gerbang otorisasi Private Gallery berbasis PIN 6-digit dengan animasi OTP shake di `app/galeri/[slug]/page.jsx`, `components/gallery/PinGateModal.jsx`, dan `lib/actions/gallery.js` (PBI-16 / FR-09).
+* `feat`: Pembuatan tampilan Masonry Pinterest-style galeri foto ber-watermark dengan responsive multi-column layout, lightbox zoom layar penuh, dan status kurasi (PBI-16 / FR-09).
+* `feat`: Implementasi fitur kurasi proofing foto album cetak dengan batas kuota kupon paket, input catatan retouch personal, dan tombol finalisasi kurasi terkunci (PBI-17 / FR-10).
+* `feat`: Pembuatan mesin unduh Gated Master ZIP beresolusi tinggi dengan syarat mutlak invoice lunas 100% dan expiring token keamanan 48 jam di `components/gallery/GalleryMasonryView.jsx` (PBI-18 / FR-11).
+* `feat`: Pembuatan modul admin Mass Upload & Auto-Watermark Engine di `app/admin/galeri/page.jsx` dan `components/admin/AdminGalleryManagerClient.jsx` dengan burning watermark otomatis via HTML5 Canvas (PBI-15 / FR-16).
+* `feat`: Implementasi dashboard analitik omzet studio dengan visualisasi grafik interaktif Recharts (`AdminAnalyticsChart.jsx`) dan pemantauan paket terlaris di `app/admin/dashboard/page.jsx` (PBI-19 / FR-17).
+* `feat`: Pembuatan direktori database pelanggan di `app/admin/pelanggan/page.jsx` dan `components/admin/AdminCustomersClient.jsx` dengan integrasi tautan WhatsApp 1-klik dan riwayat nominal transaksi (PBI-19 / FR-03 & FR-13).
+* `feat`: Pembuatan halaman portal pencarian galeri privat publik di `app/galeri-privat/page.jsx` dan `components/gallery/PrivateGalleryEntryClient.jsx` (FR-09).
+* `test`: Pengujian penetrasi keamanan 17 FR (anti-tampering, IDOR prevention, SQL injection sanitization, MIME-type enforcement), database seed script `demo_seed.sql`, dan verifikasi build produksi lolos 100% (`npm run build` sukses 18/18 rute) (PBI-20).
 
 ### [21 November 2026] - Booking Engine, Anti Double-Booking & Invoicing Finansial (Sprint 3: PBI-09 s/d PBI-14)
 * `feat`: Implementasi kalender anti-bentrok `components/booking/BookingCalendar.jsx` terhubung ke Stored Procedure PostgreSQL `check_slot_availability(p_date, p_start, p_end)`.

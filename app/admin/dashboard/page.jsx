@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import { connection } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { logoutUser } from "@/lib/actions/auth";
+import { getAdminAnalyticsSummary } from "@/lib/actions/admin";
+import AdminAnalyticsChart from "@/components/admin/AdminAnalyticsChart";
 import { 
   ShieldAlert, 
   CheckCircle, 
@@ -15,8 +17,15 @@ import {
   Sparkles, 
   TrendingUp,
   CreditCard,
-  ArrowRight
+  ArrowRight,
+  FolderLock,
+  Contact
 } from "lucide-react";
+
+export const metadata = {
+  title: "Admin Studio Dashboard — Iluxy Creative",
+  description: "Panel kendali operasional studio, omzet transaksi, kurasi album, dan kru fotografi.",
+};
 
 async function AdminDashboardContent() {
   await connection();
@@ -38,6 +47,17 @@ async function AdminDashboardContent() {
   const fullName = user.user_metadata?.full_name || "Admin Studio";
   const email = user.email;
 
+  // Ambil Data Analitik Real-time
+  const analytics = await getAdminAnalyticsSummary();
+
+  const formatRupiah = (val) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      maximumFractionDigits: 0,
+    }).format(val || 0);
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-12">
       {/* Top Banner Studio Admin */}
@@ -55,14 +75,14 @@ async function AdminDashboardContent() {
                   Studio Administrator
                 </span>
                 <span className="text-[11px] text-amber-300 font-medium">
-                  Hak Akses Penuh
+                  Hak Akses Penuh (FR-01 s/d FR-17)
                 </span>
               </div>
               <h1 className="text-xl sm:text-2xl font-bold text-white">
                 Panel Manajemen — {fullName}
               </h1>
               <p className="text-xs text-neutral-400 mt-0.5">
-                {email} • Wilayah Kerja: Iluxy Creative Padang
+                {email} • Wilayah Kerja: Iluxy Creative Studio Padang
               </p>
             </div>
           </div>
@@ -84,46 +104,63 @@ async function AdminDashboardContent() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div className="p-5 rounded-2xl bg-neutral-900/40 border border-white/5">
           <div className="flex items-center justify-between text-neutral-400 mb-2">
+            <span className="text-xs font-medium">Omzet Kotor Terverifikasi</span>
+            <TrendingUp className="w-4 h-4 text-amber-400" />
+          </div>
+          <div className="text-xl sm:text-2xl font-black text-amber-400">
+            {formatRupiah(analytics?.totalRevenue)}
+          </div>
+          <p className="text-[11px] text-emerald-400 mt-1">Akumulasi transaksi sukses</p>
+        </div>
+
+        <div className="p-5 rounded-2xl bg-neutral-900/40 border border-white/5">
+          <div className="flex items-center justify-between text-neutral-400 mb-2">
             <span className="text-xs font-medium">Antrean Verifikasi DP</span>
             <CreditCard className="w-4 h-4 text-amber-400" />
           </div>
-          <div className="text-2xl font-black text-white">3 Pesanan</div>
+          <div className="text-2xl font-black text-white">
+            {analytics?.pendingPaymentsCount || 0} Bukti
+          </div>
           <p className="text-[11px] text-amber-400/80 mt-1">Perlu dicek manual oleh admin</p>
         </div>
 
         <div className="p-5 rounded-2xl bg-neutral-900/40 border border-white/5">
           <div className="flex items-center justify-between text-neutral-400 mb-2">
-            <span className="text-xs font-medium">Jadwal Sesi Minggu Ini</span>
+            <span className="text-xs font-medium">Sesi Terkonfirmasi</span>
             <Clock className="w-4 h-4 text-amber-400" />
           </div>
-          <div className="text-2xl font-black text-white">5 Sesi Foto</div>
+          <div className="text-2xl font-black text-white">
+            {analytics?.confirmedBookingsCount || 0} Sesi Foto
+          </div>
           <p className="text-[11px] text-emerald-400 mt-1">Kru & Fotografer terkonfirmasi</p>
         </div>
 
         <div className="p-5 rounded-2xl bg-neutral-900/40 border border-white/5">
           <div className="flex items-center justify-between text-neutral-400 mb-2">
-            <span className="text-xs font-medium">Galeri Siap Upload</span>
-            <UploadCloud className="w-4 h-4 text-amber-400" />
-          </div>
-          <div className="text-2xl font-black text-white">2 Galeri</div>
-          <p className="text-[11px] text-neutral-400 mt-1">Menunggu foto retouch & watermark</p>
-        </div>
-
-        <div className="p-5 rounded-2xl bg-neutral-900/40 border border-white/5">
-          <div className="flex items-center justify-between text-neutral-400 mb-2">
-            <span className="text-xs font-medium">Total Klien Terdaftar</span>
+            <span className="text-xs font-medium">Total Pesanan Masuk</span>
             <Users className="w-4 h-4 text-amber-400" />
           </div>
-          <div className="text-2xl font-black text-white">12 Pelanggan</div>
+          <div className="text-2xl font-black text-white">
+            {analytics?.totalBookingsCount || 0} Booking
+          </div>
           <p className="text-[11px] text-neutral-400 mt-1">Basis data aktif Supabase</p>
         </div>
       </div>
+
+      {/* FR-17 Analitik Omzet & Grafik Recharts */}
+      {analytics && (
+        <AdminAnalyticsChart
+          data={analytics.chartData}
+          topPackages={analytics.topPackages}
+        />
+      )}
 
       {/* Navigasi Modul Admin */}
       <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-400 mb-4">
         Modul Operasional Studio
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Modul 1: Verifikasi Pembayaran & Kru */}
         <Link
           href="/admin/verifikasi"
           className="group p-6 rounded-2xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all cursor-pointer flex flex-col justify-between"
@@ -133,31 +170,41 @@ async function AdminDashboardContent() {
               <CreditCard className="w-5 h-5" />
             </div>
             <h3 className="text-base font-bold text-white mb-1 group-hover:text-amber-400 transition-colors">
-              Verifikasi Pembayaran & Penugasan Kru
+              Verifikasi DP & Kru
             </h3>
             <p className="text-xs text-neutral-400 leading-relaxed mb-4">
-              Cek kesesuaian struk transfer klien, verifikasi transaksi DP/pelunasan, dan tugaskan tim fotografer.
+              Cek keabsahan bukti transfer bank Nagari/BCA dan tugaskan fotografer/asisten sesi.
             </p>
           </div>
           <span className="text-[11px] font-semibold text-amber-400 flex items-center gap-1">
-            <span>Buka Antrean Verifikasi</span>
+            <span>Buka Verifikasi</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </span>
         </Link>
 
-        <div className="p-6 rounded-2xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4">
-            <UploadCloud className="w-5 h-5" />
+        {/* Modul 2: Mass Upload & Watermark (PBI-15) */}
+        <Link
+          href="/admin/galeri"
+          className="group p-6 rounded-2xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all cursor-pointer flex flex-col justify-between"
+        >
+          <div>
+            <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4 group-hover:scale-110 transition-transform">
+              <UploadCloud className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white mb-1 group-hover:text-amber-400 transition-colors">
+              Galeri & Watermark
+            </h3>
+            <p className="text-xs text-neutral-400 leading-relaxed mb-4">
+              Buat gerbang PIN 6-digit galeri privat, upload massal, dan auto-watermark Iluxy.
+            </p>
           </div>
-          <h3 className="text-base font-bold text-white mb-1">Mass Upload & Watermark</h3>
-          <p className="text-xs text-neutral-400 leading-relaxed mb-4">
-            Unggah puluhan/ratusan foto sesi klien sekaligus dan auto-generate watermark studio Iluxy.
-          </p>
-          <span className="text-[11px] font-semibold text-neutral-500">
-            Sprint 15 (Akan Dikerjakan)
+          <span className="text-[11px] font-semibold text-amber-400 flex items-center gap-1">
+            <span>Buka Galeri Manager</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </span>
-        </div>
+        </Link>
 
+        {/* Modul 3: Manajemen Paket */}
         <Link
           href="/admin/paket"
           className="group p-6 rounded-2xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all flex flex-col justify-between"
@@ -167,15 +214,37 @@ async function AdminDashboardContent() {
               <Layers className="w-5 h-5" />
             </div>
             <h3 className="text-base font-bold text-white group-hover:text-amber-400 transition-colors mb-1">
-              Manajemen Paket & Harga
+              Paket & Harga
             </h3>
             <p className="text-xs text-neutral-400 leading-relaxed mb-4">
-              Ubah tarif paket foto, tambah paket baru (Wedding, Prewedding, Wisuda), dan spesifikasi album.
+              Ubah tarif paket foto (Wedding, Wisuda, Portrait), ketentuan DP, dan kuota retouch album.
             </p>
           </div>
           <span className="text-[11px] font-bold text-amber-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
             <span>Buka Manajemen Paket</span>
-            <span>&rarr;</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </span>
+        </Link>
+
+        {/* Modul 4: Direktori Pelanggan (PBI-19) */}
+        <Link
+          href="/admin/pelanggan"
+          className="group p-6 rounded-2xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all flex flex-col justify-between"
+        >
+          <div>
+            <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4 group-hover:scale-110 transition-transform">
+              <Contact className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white group-hover:text-amber-400 transition-colors mb-1">
+              Direktori Pelanggan
+            </h3>
+            <p className="text-xs text-neutral-400 leading-relaxed mb-4">
+              Database kontak klien studio, WhatsApp 1-klik, domisili, dan total akumulasi transaksi.
+            </p>
+          </div>
+          <span className="text-[11px] font-bold text-amber-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            <span>Buka Direktori Klien</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </span>
         </Link>
       </div>

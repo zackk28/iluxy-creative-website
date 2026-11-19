@@ -16,10 +16,9 @@
 ### 1.1 Definisi Estimasi & Kapasitas Tim
 * **1 Story Point (SP)** $\approx$ **1 Jam Kerja Rekayasa Efektif** (mencakup koding, testing lokal, dan dokumentasi).
 * **Total Beban Kerja**: **215 Story Points** (terbagi ke 20 Product Backlog Items dalam 4 Sprint Utama).
-* **Posisi Hari Ini (H-8 / 20 November 2026)**:
-  * Progres Aktual Selesai: **71 SP (PBI-01 s/d PBI-07 / 33% Progres Total)**.
-  * Sisa Beban Kerja: **144 SP** dalam 6–7 hari kerja menuju deadline 27 November 2026.
-  * Velocity Rata-rata Aktual: **$\approx 9 - 10$ SP / hari**.
+* **Status Akhir Proyek**:
+  * Progres Aktual Selesai: **215 SP (PBI-01 s/d PBI-20 / 100% Progres Total)**.
+  * Seluruh 4 Sprint Utama dan 17 Functional Requirements (FR-01 s/d FR-17) telah selesai diimplementasikan, teruji bebas bug kompilasi Next.js 16 Partial Prerendering, dan siap dipresentasikan di sidang proyek akhir.
 
 ### 1.2 Global Definition of Done (DoD)
 Suatu Product Backlog Item (PBI) hanya boleh berstatus 🟢 **SELESAI** jika memenuhi 6 kriteria mutlak:
@@ -49,9 +48,9 @@ Untuk menghindari fragmentasi kerja, 20 micro-sprint kini direstrukturisasi menj
 
 ```mermaid
 flowchart LR
-    S1["Sprint 1: Fondasi & UI<br>(50 SP) - Selesai"] --> S2["Sprint 2: Auth & Katalog<br>(34 SP) - Berjalan"]
-    S2 --> S3["Sprint 3: Booking Engine<br>(63 SP) - Antrean"]
-    S3 --> S4["Sprint 4: Gallery & Sidang<br>(68 SP) - Antrean"]
+    S1["Sprint 1: Fondasi & UI<br>(50 SP) - Selesai"] --> S2["Sprint 2: Auth & Katalog<br>(34 SP) - Selesai"]
+    S2 --> S3["Sprint 3: Booking Engine<br>(63 SP) - Selesai"]
+    S3 --> S4["Sprint 4: Gallery & Sidang<br>(68 SP) - Selesai"]
 ```
 
 | Sprint | Nama Sprint & Fokus Utama | Rentang Waktu | Target SP | Status | Sprint Goal |
@@ -59,8 +58,8 @@ flowchart LR
 | **Sprint 1** | **Fondasi, Design Tokens & Navigasi** | 13 - 15 Nov (H-1 s/d H-3) | 50 SP | 🟢 **SELESAI** | Menyiapkan fondasi Next.js 16, skema 12 tabel Supabase, design system, dan navigasi responsif. |
 | **Sprint 2** | **Autentikasi Multi-Role & Katalog Publik** | 16 - 20 Nov (H-4 s/d H-8) | 34 SP | 🟢 **SELESAI (100%)** | Mengamankan autentikasi Klien vs Admin, proteksi rute middleware, dan mempublikasikan katalog layanan. |
 | **Sprint 3** | **Booking Engine & Invoicing Finansial** | 21 - 24 Nov (H-9 s/d H-12) | 63 SP | 🟢 **SELESAI (100%)** | Membangun kalender anti-bentrok slot sesi, booking wizard, penerbitan invoice digital, dan verifikasi bayar. |
-| **Sprint 4** | **Private Gallery, Proofing & Kesiapan Sidang** | 25 - 27 Nov (H-13 s/d H-15) | 68 SP | 🎯 **SIAP DIGAS** | Menyediakan gerbang galeri PIN 6 digit, kurasi album, gated master ZIP, serta audit pentest final sidang. |
-| **TOTAL** | **4 Sprints (20 Product Backlog Items)** | **15 Hari** | **215 SP** | **147 / 215 SP (68%)** | **Sprint 1, 2, & 3 Tuntas (14 PBI Selesai). Siap Masuk ke Sprint 4 Final.** |
+| **Sprint 4** | **Private Gallery, Proofing & Kesiapan Sidang** | 25 - 27 Nov (H-13 s/d H-15) | 68 SP | 🟢 **SELESAI (100%)** | Menyediakan gerbang galeri PIN 6 digit, kurasi album, gated master ZIP, analitik omzet, serta audit pentest final sidang. |
+| **TOTAL** | **4 Sprints (20 Product Backlog Items)** | **15 Hari** | **215 SP** | **215 / 215 SP (100%)** | **SELURUH 4 SPRINT & 20 PBI TUNTAS DIKERJAKAN & TERVERIFIKASI PRODUKSI!** |
 
 ---
 
@@ -82,13 +81,13 @@ flowchart LR
 | **PBI-12** | Sprint 3 | Digital Invoicing DP/Pelunasan & Salin Rekening | Must | 8 SP | 🟢 Selesai | `feat: implementasi digital invoicing engine dp dan pelunasan serta salin rekening` |
 | **PBI-13** | Sprint 3 | Dropzone Upload Struk Bukti Transfer | Must | 8 SP | 🟢 Selesai | `feat: implementasi dropzone upload bukti transfer dan kompresi gambar` |
 | **PBI-14** | Sprint 3 | Admin Verifikasi Pembayaran & Penugasan Kru | Must | 13 SP | 🟢 Selesai | `feat: implementasi panel admin verifikasi pembayaran dan penugasan kru fotografer` |
-| **PBI-15** | Sprint 4 | Admin Chunked Mass Upload & Auto-Watermark | Should | 13 SP | 🎯 **SIAP DIGAS** | `feat: implementasi chunked mass upload foto galeri dan auto watermark engine` |
-| **PBI-16** | Sprint 4 | Gerbang Private Gallery PIN 6-Digit (OTP Shake) | Must | 8 SP | ⏳ Antrean | `feat: implementasi gerbang akses private gallery pin 6 digit dan masonry layout` |
-| **PBI-17** | Sprint 4 | Kurasi Proofing Cetak Album & Catatan Retouch | Must | 13 SP | ⏳ Antrean | `feat: implementasi kurasi foto proofing cetak album dan catatan retouch` |
-| **PBI-18** | Sprint 4 | Gated Master ZIP (Syarat Lunas 100%) | Must | 13 SP | ⏳ Antrean | `feat: implementasi gated master zip download dengan expiring token 48 jam` |
-| **PBI-19** | Sprint 4 | Dashboard Analitik Omzet & Direktori Klien | Could | 13 SP | ⏳ Antrean | `feat: implementasi dashboard analitik omzet studio dan direktori pelanggan` |
-| **PBI-20** | Sprint 4 | Full Pentest, Testing 17 FR, Audit & Sidang | Must | 8 SP | ⏳ Antrean | `test: full penetration testing 17 fr, audit lighthouse dan final deployment` |
-| **TOTAL** | **4 Sprints** | **17 FR + 12 Tabel Relasional 3NF + OWASP** | **-** | **215 SP** | **14 / 20 Selesai (70%) - 147 SP** | **SPRINT 3 TUNTAS! MASUK KE SPRINT 4 (GALLERY & PROOFING)** |
+| **PBI-15** | Sprint 4 | Admin Chunked Mass Upload & Auto-Watermark | Should | 13 SP | 🟢 Selesai | `feat: implementasi chunked mass upload foto galeri dan auto watermark engine` |
+| **PBI-16** | Sprint 4 | Gerbang Private Gallery PIN 6-Digit (OTP Shake) | Must | 8 SP | 🟢 Selesai | `feat: implementasi gerbang akses private gallery pin 6 digit dan masonry layout` |
+| **PBI-17** | Sprint 4 | Kurasi Proofing Cetak Album & Catatan Retouch | Must | 13 SP | 🟢 Selesai | `feat: implementasi kurasi foto proofing cetak album dan catatan retouch` |
+| **PBI-18** | Sprint 4 | Gated Master ZIP (Syarat Lunas 100%) | Must | 13 SP | 🟢 Selesai | `feat: implementasi gated master zip download dengan expiring token 48 jam` |
+| **PBI-19** | Sprint 4 | Dashboard Analitik Omzet & Direktori Klien | Could | 13 SP | 🟢 Selesai | `feat: implementasi dashboard analitik omzet studio dan direktori pelanggan` |
+| **PBI-20** | Sprint 4 | Full Pentest, Testing 17 FR, Audit & Sidang | Must | 8 SP | 🟢 Selesai | `test: full penetration testing 17 fr, audit lighthouse dan final deployment` |
+| **TOTAL** | **4 Sprints** | **17 FR + 12 Tabel Relasional 3NF + OWASP** | **-** | **215 SP** | **20 / 20 Selesai (100%) - 215 SP** | **SELURUH FITUR SUDAH SELESAI, TERUJI BUILD PRODUKSI, DAN SIAP SIDANG** |
 
 ---
 
@@ -382,4 +381,19 @@ Seluruh pengerjaan wajib menggunakan format pesan commit terstandarisasi untuk m
 * **Action Item / Perbaikan**:
   1. Memanfaatkan lazy initializer function `useState(() => ...)` untuk render pertama instan tanpa efek samping.
   2. Menambahkan dual support (named + default export) pada `components/ui/AnimatedButton.jsx`.
-  3. Memasuki **Sprint 4 Final (Private Gallery, Proofing & Kesiapan Sidang)**: PBI-15 s/d PBI-20.
+
+### Sprint 4 Review & Retro (25 - 27 Nov):
+* **Pencapaian**: Sprint 4 tuntas 100% (68 SP). Seluruh 20 PBI dan 17 FR selesai lengkap:
+  1. **PBI-15**: Admin Chunked Mass Upload & Auto-Watermark Engine via HTML5 Canvas di `/admin/galeri`.
+  2. **PBI-16**: Gerbang Akses Private Gallery PIN 6-Digit (OTP Shake animation & slug access) di `/galeri/[slug]`.
+  3. **PBI-17**: Kurasi Proofing Cetak Album, Catatan Retouch khusus, dan finalisasi kurasi terkunci.
+  4. **PBI-18**: Gated Master ZIP Download dengan syarat status invoice `PAID` (Lunas 100%) dan Expiring Token 48 jam.
+  5. **PBI-19**: Dashboard Analitik Omzet Studio berbasis Recharts Area Chart dan Direktori Pelanggan WhatsApp di `/admin/pelanggan`.
+  6. **PBI-20**: Full Penetration Testing 17 FR, demo seed script `demo_seed.sql`, dan verifikasi `npm run build` lolos 100% dengan Partial Prerendering (18/18 static & dynamic routes).
+* **Kendala yang Ditemukan**:
+  1. Error Next.js 16 Partial Prerendering terkait nilai `Date.now()` yang dibaca saat static render.
+  2. Rule React 19 terkait pemanggilan `Math.random()` dan `setState` dalam render cycle.
+* **Action Item / Perbaikan**:
+  1. Menambahkan `await connection()` dari `next/server` pada semua komponen Server Component ber-Suspense.
+  2. Mengganti hook mounted dengan `useSyncExternalStore` dan mendefinisikan komponen Recharts Tooltip di luar render loop.
+  3. Sistem telah 100% siap untuk Sidang Proyek Akhir TRPL Politeknik Negeri Padang.
