@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS users (
     email TEXT UNIQUE NOT NULL,
     full_name TEXT NOT NULL,
     phone_number TEXT NOT NULL,
+    avatar_url TEXT,
     role user_role DEFAULT 'CLIENT',
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
@@ -45,6 +46,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS customers (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+    avatar_url TEXT,
     instagram_handle TEXT,
     address TEXT,
     city TEXT DEFAULT 'Padang',

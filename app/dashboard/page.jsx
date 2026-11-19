@@ -1,8 +1,12 @@
 import React, { Suspense } from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { logoutUser } from "@/lib/actions/auth";
+import { getUserBookings } from "@/lib/actions/booking";
+import ClientBookingsList from "@/components/dashboard/ClientBookingsList";
+import CustomerAvatarUpload from "@/components/dashboard/CustomerAvatarUpload";
 import { 
   User, 
   Calendar, 
@@ -12,10 +16,12 @@ import {
   Clock, 
   Camera, 
   ShieldCheck, 
-  ArrowRight 
+  ArrowRight,
+  BookmarkCheck
 } from "lucide-react";
 
 async function DashboardContent() {
+  await connection();
   const supabase = await createClient();
   const {
     data: { user },
@@ -30,6 +36,15 @@ async function DashboardContent() {
   const phoneNumber = user.user_metadata?.phone_number || "-";
   const role = user.user_metadata?.role || "CLIENT";
 
+  const [{ data: customer }, bookings] = await Promise.all([
+    supabase
+      .from("customers")
+      .select("avatar_url")
+      .eq("user_id", user.id)
+      .maybeSingle(),
+    getUserBookings(),
+  ]);
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 md:py-12">
       {/* Header Profile Greeting */}
@@ -38,9 +53,10 @@ async function DashboardContent() {
 
         <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-300 flex items-center justify-center text-neutral-950 font-black text-2xl shadow-lg shadow-amber-500/30">
-              {fullName.charAt(0).toUpperCase()}
-            </div>
+            <CustomerAvatarUpload
+              currentAvatarUrl={customer?.avatar_url || user.user_metadata?.avatar_url}
+              fullName={fullName}
+            />
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-xs uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300">
@@ -140,6 +156,32 @@ async function DashboardContent() {
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </div>
         </Link>
+      </div>
+
+      {/* Section Riwayat Pesanan & Jadwal Klien (PBI-11) */}
+      <div className="mt-12 space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400">
+              <BookmarkCheck className="w-5 h-5" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-white">Riwayat Pemesanan & Status Sesi</h2>
+              <p className="text-xs text-neutral-400">
+                Pantau konfirmasi jadwal, lembar invoice tagihan, dan kebijakan pembatalan H-3.
+              </p>
+            </div>
+          </div>
+
+          <Link
+            href="/booking"
+            className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1"
+          >
+            <span>+ Pesan Sesi Baru</span>
+          </Link>
+        </div>
+
+        <ClientBookingsList bookings={bookings} />
       </div>
     </div>
   );

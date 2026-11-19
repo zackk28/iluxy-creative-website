@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { logoutUser } from "@/lib/actions/auth";
 import { 
@@ -13,10 +14,12 @@ import {
   LogOut, 
   Sparkles, 
   TrendingUp,
-  CreditCard
+  CreditCard,
+  ArrowRight
 } from "lucide-react";
 
 async function AdminDashboardContent() {
+  await connection();
   const supabase = await createClient();
   const {
     data: { user },
@@ -121,18 +124,26 @@ async function AdminDashboardContent() {
         Modul Operasional Studio
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="p-6 rounded-2xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4">
-            <CreditCard className="w-5 h-5" />
+        <Link
+          href="/admin/verifikasi"
+          className="group p-6 rounded-2xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all cursor-pointer flex flex-col justify-between"
+        >
+          <div>
+            <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4 group-hover:scale-110 transition-transform">
+              <CreditCard className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white mb-1 group-hover:text-amber-400 transition-colors">
+              Verifikasi Pembayaran & Penugasan Kru
+            </h3>
+            <p className="text-xs text-neutral-400 leading-relaxed mb-4">
+              Cek kesesuaian struk transfer klien, verifikasi transaksi DP/pelunasan, dan tugaskan tim fotografer.
+            </p>
           </div>
-          <h3 className="text-base font-bold text-white mb-1">Verifikasi Pembayaran</h3>
-          <p className="text-xs text-neutral-400 leading-relaxed mb-4">
-            Cek kesesuaian struk transfer klien dan setujui pelunasan/DP untuk mengunci slot sesi.
-          </p>
-          <span className="text-[11px] font-semibold text-neutral-500">
-            Sprint 14 (Akan Dikerjakan)
+          <span className="text-[11px] font-semibold text-amber-400 flex items-center gap-1">
+            <span>Buka Antrean Verifikasi</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </span>
-        </div>
+        </Link>
 
         <div className="p-6 rounded-2xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all">
           <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4">
@@ -147,18 +158,26 @@ async function AdminDashboardContent() {
           </span>
         </div>
 
-        <div className="p-6 rounded-2xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4">
-            <Layers className="w-5 h-5" />
+        <Link
+          href="/admin/paket"
+          className="group p-6 rounded-2xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all flex flex-col justify-between"
+        >
+          <div>
+            <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4 group-hover:scale-110 transition-transform">
+              <Layers className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white group-hover:text-amber-400 transition-colors mb-1">
+              Manajemen Paket & Harga
+            </h3>
+            <p className="text-xs text-neutral-400 leading-relaxed mb-4">
+              Ubah tarif paket foto, tambah paket baru (Wedding, Prewedding, Wisuda), dan spesifikasi album.
+            </p>
           </div>
-          <h3 className="text-base font-bold text-white mb-1">Manajemen Paket & Harga</h3>
-          <p className="text-xs text-neutral-400 leading-relaxed mb-4">
-            Ubah tarif paket foto, tambah paket baru (Wedding, Prewedding, Wisuda), dan spesifikasi album.
-          </p>
-          <span className="text-[11px] font-semibold text-neutral-500">
-            Sprint 08 (Akan Dikerjakan)
+          <span className="text-[11px] font-bold text-amber-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            <span>Buka Manajemen Paket</span>
+            <span>&rarr;</span>
           </span>
-        </div>
+        </Link>
       </div>
     </div>
   );

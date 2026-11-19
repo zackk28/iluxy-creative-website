@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import { connection } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import KatalogView from "@/components/katalog/KatalogView";
 import { PackageCardSkeleton } from "@/components/ui/SkeletonShimmer";
@@ -10,6 +11,7 @@ export const metadata = {
 };
 
 async function KatalogContent() {
+  await connection();
   const supabase = await createClient();
 
   const [{ data: categories }, { data: packages }] = await Promise.all([

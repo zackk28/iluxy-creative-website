@@ -57,3 +57,5 @@ export function AnimatedButton({
     </motion.button>
   );
 }
+
+export default AnimatedButton;

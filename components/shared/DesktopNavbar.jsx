@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { Camera, CalendarDays, Images, User, Sparkles } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 
 const navItems = [
   { label: "Katalog", href: "/katalog", icon: Camera },
@@ -17,6 +18,59 @@ export default function DesktopNavbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [userProfile, setUserProfile] = useState(null);
+
+  // Ambil data sesi profil pengguna (avatar dan nama)
+  useEffect(() => {
+    const supabase = createClient();
+
+    async function loadUserProfile() {
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (!user) {
+          setUserProfile(null);
+          return;
+        }
+
+        // Ambil avatar_url dari tabel customers
+        const { data: customer } = await supabase
+          .from("customers")
+          .select("avatar_url")
+          .eq("user_id", user.id)
+          .maybeSingle();
+
+        const avatarUrl = customer?.avatar_url || user.user_metadata?.avatar_url || null;
+        const fullName = user.user_metadata?.full_name || "Pelanggan";
+        const initial = fullName.charAt(0).toUpperCase();
+        const role = user.user_metadata?.role || "CLIENT";
+
+        setUserProfile({
+          id: user.id,
+          fullName,
+          avatarUrl,
+          initial,
+          role,
+        });
+      } catch (err) {
+        console.warn("Gagal memuat avatar navbar:", err);
+      }
+    }
+
+    loadUserProfile();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(() => {
+      loadUserProfile();
+    });
+
+    return () => {
+      subscription?.unsubscribe();
+    };
+  }, []);
 
   // Dynamic mouse coordinates for ambient spotlight effect
   const mouseX = useMotionValue(0);
@@ -38,6 +92,12 @@ export default function DesktopNavbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const profileHref = userProfile
+    ? userProfile.role === "ADMIN"
+      ? "/admin/dashboard"
+      : "/dashboard"
+    : "/";
+
   return (
     <header className="hidden md:block fixed top-6 inset-x-0 z-50 pointer-events-none">
       <div className="flex justify-center">
@@ -49,8 +109,8 @@ export default function DesktopNavbar() {
           onMouseMove={handleMouseMove}
           className={`group/nav pointer-events-auto relative flex items-center gap-2 px-3 py-2 rounded-full border shadow-2xl backdrop-blur-2xl transition-all duration-300 ${
             isScrolled
-              ? "bg-neutral-950/90 border-amber-500/25 shadow-[0_15px_35px_rgba(0,0,0,0.8),0_0_20px_rgba(245,158,11,0.12)] py-1.5"
-              : "bg-neutral-900/80 border-white/10 hover:border-amber-500/20 shadow-[0_15px_35px_rgba(0,0,0,0.7)]"
+              ? "bg-neutral-950/90 border-amber-500/25 shadow-[0_15px_35px_rgba(0,0,0,0.8),0_0_20px_rgba(245,158,11,0.12)]"
+              : "bg-neutral-900/85 border-white/10 hover:border-amber-500/20 shadow-[0_15px_35px_rgba(0,0,0,0.7)]"
           }`}
         >
           {/* 1. Dynamic Cursor Spotlight Glow */}
@@ -61,27 +121,35 @@ export default function DesktopNavbar() {
             />
           </div>
 
-          {/* 2. Logo Studio with Interactive Hover */}
+          {/* 2. Logo / Foto Profil Pengguna with Interactive Hover */}
           <Link
-            href="/"
+            href={profileHref}
+            title={userProfile ? `Profil: ${userProfile.fullName}` : "Studio Iluxy Creative"}
             className="group/logo relative z-10 flex items-center gap-2.5 px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors"
           >
             <motion.div
-              whileHover={{ scale: 1.1, rotate: 6 }}
+              whileHover={{ scale: 1.1, rotate: userProfile?.avatarUrl ? 0 : 6 }}
               whileTap={{ scale: 0.94 }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
-              className="relative w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 via-amber-400 to-amber-200 flex items-center justify-center text-neutral-950 font-black text-xs shadow-md shadow-amber-500/30 group-hover/logo:shadow-amber-500/60 transition-shadow"
+              className="relative w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 via-amber-400 to-amber-200 flex items-center justify-center text-neutral-950 font-black text-xs shadow-md shadow-amber-500/30 group-hover/logo:shadow-amber-500/60 transition-shadow overflow-hidden border border-amber-300/40"
             >
-              <span className="relative z-10">IX</span>
+              {userProfile?.avatarUrl ? (
+                <img
+                  src={userProfile.avatarUrl}
+                  alt={userProfile.fullName || "Foto Profil"}
+                  className="w-full h-full object-cover rounded-full"
+                />
+              ) : (
+                <span className="relative z-10">{userProfile?.initial || "IX"}</span>
+              )}
               {/* Subtle pulsing aura on logo */}
-              <span className="absolute inset-0 rounded-full bg-amber-400/30 blur-sm scale-110 opacity-0 group-hover/logo:opacity-100 transition-opacity duration-300" />
+              <span className="absolute inset-0 rounded-full bg-amber-400/30 blur-sm scale-110 opacity-0 group-hover/logo:opacity-100 transition-opacity duration-300 pointer-events-none" />
             </motion.div>
 
-            {!isScrolled && (
-              <span className="font-bold tracking-wider text-sm bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent group-hover/logo:from-amber-200 group-hover/logo:via-white group-hover/logo:to-amber-300 transition-all duration-300">
-                ILUXY
-              </span>
-            )}
+            {/* Label ILUXY Konsisten Tanpa Menghilang Saat Scroll */}
+            <span className="font-bold tracking-wider text-sm bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent group-hover/logo:from-amber-200 group-hover/logo:via-white group-hover/logo:to-amber-300 transition-all duration-300">
+              ILUXY
+            </span>
           </Link>
 
           {/* Divider */}

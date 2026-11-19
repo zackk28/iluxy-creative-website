@@ -77,6 +77,21 @@ git commit -m "chore: Konfigurasi Tailwind CSS dan update package-lock"
 > [!TIP]
 > **Petunjuk Update**: Setiap kali melakukan push atau menyelesaikan sprint/fitur baru, tambahkan catatan perubahan di bagian paling atas riwayat di bawah ini menggunakan kategori commit yang relevan (`feat`, `fix`, `refactor`, `docs`, `test`, `chore`).
 
+### [21 November 2026] - Booking Engine, Anti Double-Booking & Invoicing Finansial (Sprint 3: PBI-09 s/d PBI-14)
+* `feat`: Implementasi kalender anti-bentrok `components/booking/BookingCalendar.jsx` terhubung ke Stored Procedure PostgreSQL `check_slot_availability(p_date, p_start, p_end)`.
+* `feat`: Pembuatan multi-step booking wizard di `app/booking/page.jsx` dan `components/booking/BookingWizardClient.jsx` (tahapan: Paket, Tanggal/Jam, Lokasi Studio/Outdoor, Kontak Pemesan, Ringkasan Biaya & Kebijakan H-3).
+* `feat`: Pembuatan Server Action transaksi pemesanan di `lib/actions/booking.js` dengan kalkulasi harga server-side anti-tampering, generator kode booking `IX-YYYYMMDD-XXXX`, dan invoice `INV-YYYYMMDD-XXXX`.
+* `feat`: Implementasi riwayat pesanan klien di `components/dashboard/ClientBookingsList.jsx` terintegrasi langsung ke `app/dashboard/page.jsx` dengan tombol pembatalan mandiri beraturan H-3 `(session_date - NOW() >= 3 hari)`.
+* `feat`: Pembuatan mesin digital invoicing di `app/invoice/[id]/page.jsx` dan `components/invoice/InvoiceDetailClient.jsx` dengan rincian DP, sisa tagihan, batas bayar 24 jam, fitur salin nomor rekening bank studio (Bank Nagari & BCA), dan opsi cetak invoice.
+* `feat`: Implementasi modal dropzone bukti transfer di `components/payment/PaymentUploadModal.jsx` dan Server Action upload di `lib/actions/payments.js` dengan validasi MIME-type gambar dan batas file 5 MB.
+* `feat`: Pembuatan modul admin verifikasi pembayaran dan penugasan kru fotografer di `app/admin/verifikasi/page.jsx` dan `components/admin/AdminVerificationClient.jsx` (pratinjau struk full-screen, aksi verifikasi sah/tolak, dan manajemen kru di `lib/actions/crew.js`).
+
+### [20 November 2026] - Detail Spesifikasi Paket & Dashboard Admin CRUD Layanan (Sprint 08)
+* `feat`: Implementasi halaman spesifikasi paket dinamis di `app/katalog/[slug]/page.jsx` dengan breadcrumbs navigasi, breakdown DP vs pelunasan, fasilitas output foto, dan klausul kebijakan pembatalan H-3.
+* `feat`: Pembuatan dashboard admin kelola paket di `app/admin/paket/page.jsx` dan komponen `components/admin/AdminPackagesClient.jsx` (modal formulir tambah/edit, toggle status aktif, dan proteksi soft-delete).
+* `feat`: Pembuatan Server Actions di `lib/actions/packages.js` dengan verifikasi hak akses role `ADMIN` dan validasi server-side constraint harga (`price > 0`, `dp_amount > 0`).
+* `fix`: Optimalisasi Next.js 16 Partial Prerendering (PPR) dengan pembungkusan komponen client navigasi (`DesktopNavbar`, `MobileBottomBar`) ke dalam batas `<Suspense>`.
+
 ### [20 November 2026] - Showcase Katalog Publik & Filter Kategori Dinamis (Sprint 07)
 * `feat`: Implementasi halaman katalog publik di `app/katalog/page.jsx` terintegrasi langsung dengan Supabase PostgreSQL.
 * `feat`: Pembuatan komponen `components/katalog/KatalogView.jsx` dengan fitur live search kata kunci, tab filter kategori dinamis, dan sorting harga/durasi.

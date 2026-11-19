@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import "./globals.css";
 import DesktopNavbar from "@/components/shared/DesktopNavbar";
 import MobileBottomBar from "@/components/shared/MobileBottomBar";
@@ -14,13 +15,17 @@ export default function RootLayout({ children }) {
     <html lang="id" className="dark">
       <body className="bg-[#0A0A0E] text-neutral-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-neutral-950">
         {/* Desktop Floating Pill Navbar */}
-        <DesktopNavbar />
+        <Suspense fallback={<div className="h-14" />}>
+          <DesktopNavbar />
+        </Suspense>
 
         {/* Main Content Area */}
         <main className="flex-1 pb-24 md:pb-12 pt-20 md:pt-24">{children}</main>
 
         {/* Mobile Bottom Tab Bar */}
-        <MobileBottomBar />
+        <Suspense fallback={null}>
+          <MobileBottomBar />
+        </Suspense>
       </body>
     </html>
   );
