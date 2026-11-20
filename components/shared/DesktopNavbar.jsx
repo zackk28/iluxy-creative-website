@@ -4,14 +4,35 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
-import { Camera, CalendarDays, Images, User, Sparkles } from "lucide-react";
+import { 
+  Camera, 
+  CalendarDays, 
+  Images, 
+  User, 
+  Sparkles, 
+  ShieldCheck,
+  LayoutDashboard,
+  CreditCard,
+  UploadCloud,
+  Layers,
+  Users,
+  ExternalLink
+} from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
-const navItems = [
+const clientNavItems = [
   { label: "Katalog", href: "/katalog", icon: Camera },
   { label: "Jadwal", href: "/booking", icon: CalendarDays },
   { label: "Galeri Privat", href: "/galeri-privat", icon: Images },
   { label: "Akun Saya", href: "/dashboard", icon: User },
+];
+
+const adminNavItems = [
+  { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
+  { label: "Verifikasi & Kru", href: "/admin/verifikasi", icon: CreditCard },
+  { label: "Galeri & Watermark", href: "/admin/galeri", icon: UploadCloud },
+  { label: "Paket & Harga", href: "/admin/paket", icon: Layers },
+  { label: "Pelanggan", href: "/admin/pelanggan", icon: Users },
 ];
 
 export default function DesktopNavbar() {
@@ -92,8 +113,11 @@ export default function DesktopNavbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isAdmin = userProfile?.role === "ADMIN";
+  const currentNavItems = isAdmin ? adminNavItems : clientNavItems;
+
   const profileHref = userProfile
-    ? userProfile.role === "ADMIN"
+    ? isAdmin
       ? "/admin/dashboard"
       : "/dashboard"
     : "/";
@@ -124,8 +148,8 @@ export default function DesktopNavbar() {
           {/* 2. Logo / Foto Profil Pengguna with Interactive Hover */}
           <Link
             href={profileHref}
-            title={userProfile ? `Profil: ${userProfile.fullName}` : "Studio Iluxy Creative"}
-            className="group/logo relative z-10 flex items-center gap-2.5 px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors"
+            title={userProfile ? `Profil: ${userProfile.fullName} (${userProfile.role})` : "Studio Iluxy Creative"}
+            className="group/logo relative z-10 flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors"
           >
             <motion.div
               whileHover={{ scale: 1.1, rotate: userProfile?.avatarUrl ? 0 : 6 }}
@@ -146,10 +170,17 @@ export default function DesktopNavbar() {
               <span className="absolute inset-0 rounded-full bg-amber-400/30 blur-sm scale-110 opacity-0 group-hover/logo:opacity-100 transition-opacity duration-300 pointer-events-none" />
             </motion.div>
 
-            {/* Label ILUXY Konsisten Tanpa Menghilang Saat Scroll */}
+            {/* Label ILUXY */}
             <span className="font-bold tracking-wider text-sm bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent group-hover/logo:from-amber-200 group-hover/logo:via-white group-hover/logo:to-amber-300 transition-all duration-300">
               ILUXY
             </span>
+
+            {/* Badge Admin */}
+            {isAdmin && (
+              <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-neutral-950 shadow-md">
+                ADMIN
+              </span>
+            )}
           </Link>
 
           {/* Divider */}
@@ -160,8 +191,8 @@ export default function DesktopNavbar() {
             className="relative z-10 flex items-center gap-0.5"
             onMouseLeave={() => setHoveredIndex(null)}
           >
-            {navItems.map((item, idx) => {
-              const isActive = pathname === item.href;
+            {currentNavItems.map((item, idx) => {
+              const isActive = pathname === item.href || (item.href !== "/admin/dashboard" && item.href !== "/dashboard" && pathname.startsWith(item.href));
               const isHovered = hoveredIndex === idx;
               const Icon = item.icon;
 
@@ -170,7 +201,7 @@ export default function DesktopNavbar() {
                   key={item.href}
                   href={item.href}
                   onMouseEnter={() => setHoveredIndex(idx)}
-                  className={`group/item relative px-4 py-2 text-xs uppercase tracking-wider font-semibold rounded-full transition-colors duration-200 ${
+                  className={`group/item relative px-3.5 py-2 text-xs uppercase tracking-wider font-semibold rounded-full transition-colors duration-200 ${
                     isActive
                       ? "text-amber-400"
                       : isHovered
@@ -191,7 +222,7 @@ export default function DesktopNavbar() {
                     />
                   )}
 
-                  {/* Active Page Pill (shows when not hovering this specific tab) */}
+                  {/* Active Page Pill */}
                   {isActive && !isHovered && (
                     <motion.div
                       layoutId="navbar-active-pill"
@@ -234,7 +265,7 @@ export default function DesktopNavbar() {
                     </span>
                   </span>
 
-                  {/* Glowing Active Dot Indicator underneath */}
+                  {/* Glowing Active Dot Indicator */}
                   {isActive && (
                     <motion.span
                       layoutId="navbar-active-dot"
@@ -251,37 +282,48 @@ export default function DesktopNavbar() {
             })}
           </div>
 
-          {/* 4. "Book Slot" Quick Action Button with Shimmer & Spring Hover */}
+          {/* 4. Quick Action Button (Khusus Admin: "Web Publik" | Khusus Klien: "Book Slot") */}
           <div className="relative z-10 pl-1">
             <motion.div
               whileHover={{ scale: 1.05, y: -1 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 450, damping: 20 }}
             >
-              <Link
-                href="/booking"
-                className="group/cta relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-neutral-950 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 rounded-full shadow-[0_0_20px_rgba(245,158,11,0.35)] hover:shadow-[0_0_25px_rgba(245,158,11,0.6)] overflow-hidden transition-all duration-300"
-              >
-                {/* Continuous Shimmer Light Beam */}
-                <motion.div
-                  className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 pointer-events-none"
-                  initial={{ x: "-180%" }}
-                  animate={{ x: "280%" }}
-                  transition={{
-                    type: "tween",
-                    repeat: Infinity,
-                    duration: 2.8,
-                    ease: "easeInOut",
-                    repeatDelay: 1.2,
-                  }}
-                />
+              {isAdmin ? (
+                <Link
+                  href="/katalog"
+                  title="Lihat Tampilan Website Publik Klien"
+                  className="group/cta relative inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-amber-300 hover:text-white bg-neutral-800/80 hover:bg-neutral-800 border border-amber-500/30 hover:border-amber-400/60 rounded-full transition-all duration-300 shadow-md shadow-amber-500/5"
+                >
+                  <ExternalLink className="w-3.5 h-3.5 text-amber-400 group-hover/cta:scale-110 transition-transform" />
+                  <span>Web Publik</span>
+                </Link>
+              ) : (
+                <Link
+                  href="/booking"
+                  className="group/cta relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-neutral-950 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 rounded-full shadow-[0_0_20px_rgba(245,158,11,0.35)] hover:shadow-[0_0_25px_rgba(245,158,11,0.6)] overflow-hidden transition-all duration-300"
+                >
+                  {/* Continuous Shimmer Light Beam */}
+                  <motion.div
+                    className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 pointer-events-none"
+                    initial={{ x: "-180%" }}
+                    animate={{ x: "280%" }}
+                    transition={{
+                      type: "tween",
+                      repeat: Infinity,
+                      duration: 2.8,
+                      ease: "easeInOut",
+                      repeatDelay: 1.2,
+                    }}
+                  />
 
-                {/* Sparkling Icon & Label */}
-                <span className="relative z-10 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 transition-transform duration-300 group-hover/cta:rotate-45 group-hover/cta:scale-125" />
-                  <span>Book Slot</span>
-                </span>
-              </Link>
+                  {/* Sparkling Icon & Label */}
+                  <span className="relative z-10 flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 transition-transform duration-300 group-hover/cta:rotate-45 group-hover/cta:scale-125" />
+                    <span>Book Slot</span>
+                  </span>
+                </Link>
+              )}
             </motion.div>
           </div>
         </motion.nav>
@@ -289,3 +331,4 @@ export default function DesktopNavbar() {
     </header>
   );
 }
+

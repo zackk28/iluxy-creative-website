@@ -36,6 +36,11 @@ async function DashboardContent() {
   const phoneNumber = user.user_metadata?.phone_number || "-";
   const role = user.user_metadata?.role || "CLIENT";
 
+  // Jika akun adalah ADMIN, arahkan langsung ke Panel Manajemen Studio Admin
+  if (role === "ADMIN") {
+    redirect("/admin/dashboard");
+  }
+
   const [{ data: customer }, bookings] = await Promise.all([
     supabase
       .from("customers")
